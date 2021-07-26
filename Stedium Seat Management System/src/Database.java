@@ -98,13 +98,10 @@ public class Database {
 		for(int i = 0;  i < clients.length; i++) {
 			if(clients[i]!= null ) {
 				if(clients[i].getUsername().equals(username)) {
-					if(password != null) {
 						if(clients[i].getPassword().equals(password)) {
 							return 2;
 						}
 						else return 1;
-					}
-					else return 1;
 				}
 			}
 		}
@@ -124,6 +121,17 @@ public class Database {
 		return false;
 	}
 	
+	
+	public static boolean isUsernameExist(String username) {
+		for(int i =0; i < clients.length; i++) {
+			if(clients[i] != null ) {
+				if(clients[i].getUsername().equals(username)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 	
 	// menus
 	

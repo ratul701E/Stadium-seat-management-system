@@ -9,7 +9,7 @@ public class Group1Stedium {
 	
 	
 	
-	private void login() {
+	public static void login() {
 		
 		while(true) {
 			System.out.println("\t\t==== Log in Menu ====\n\n"
@@ -26,7 +26,11 @@ public class Group1Stedium {
 					password = Tools.getInput("Password");
 					
 					if(Database.isExistUser(username, password) == 2) {
-						// access user
+						System.out.println("logged in");
+						
+						
+						// break mandatory
+						
 					}else if(Database.isExistUser(username, password) == 1) {
 						System.out.println("Invalid password");
 					}else {
@@ -50,7 +54,7 @@ public class Group1Stedium {
 	//
 	
 	
-	private void signup() {
+	public static void signup() {
 		String name, gender, number, address, email, username, password;
 		
 		int age;
@@ -65,7 +69,7 @@ public class Group1Stedium {
 		
 		while(true) {
 			username = Tools.getInput(("Enter your username* : "));
-			if(Database.isExistUser(username, null) == 0) {
+			if(!Database.isUsernameExist(username)) {
 				break;
 			}
 			System.out.println("username is taken.. try diffrent name please");
@@ -74,7 +78,7 @@ public class Group1Stedium {
 		
 		password = Tools.getInput("Enter your password");
 		
-		Database.addClient(new Client(name,age,gender,number,address,email,new Account(500), 200));
+		Database.addClient(new Client(name,age,gender,number,address,email,username, password, new Account(500), 200));
 		System.out.println("Account created successfully");
 		
 		// enter to continue
