@@ -25,7 +25,7 @@ public class Start {
 		Client c1 = new Client("Ratul", 20, "Male", "01920221554", "Nandipara", "Ratul@gamil.com", 20);
 		Client c2 = new Client("Priya", 20, "Female", "017.......23", "Gazipur", "Priya@gamil.com", 20);
 		
-		Ticket t1 = new Ticket("2136", 5, 550);
+		Ticket t1 = new Ticket("2136", 5, 550,1);
 		c2.addTicket(t1);
 		
 		//admin.manageMatches();

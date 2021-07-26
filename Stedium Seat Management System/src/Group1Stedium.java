@@ -47,6 +47,41 @@ public class Group1Stedium {
 		}
 	}
 	
+	//
+	
+	
+	private void signup() {
+		String name, gender, number, address, email, username, password;
+		
+		int age;
+		System.out.println("\t\t==== Signup Page ====\n");
+		
+		name = Tools.getInput("Enter your name*");
+		age = Integer.parseInt(Tools.getInput("Enter your age*"));
+		gender = Tools.getInput("Enter your gender*");
+		number = Tools.getInput("Enter your number*");
+		address = Tools.getInput("Enter your address*");
+		email = Tools.getInput("Enter your email*");
+		
+		while(true) {
+			username = Tools.getInput(("Enter your username* : "));
+			if(Database.isExistUser(username, null) == 0) {
+				break;
+			}
+			System.out.println("username is taken.. try diffrent name please");
+
+		}
+		
+		password = Tools.getInput("Enter your password");
+		
+		Database.addClient(new Client(name,age,gender,number,address,email,new Account(500), 200));
+		System.out.println("Account created successfully");
+		
+		// enter to continue
+		
+		
+	}
+	
 	
 	private Ticket bookTicket(Client client, Match match) {
 		Ticket ticket;

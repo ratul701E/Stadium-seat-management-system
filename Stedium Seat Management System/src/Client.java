@@ -25,7 +25,7 @@ public class Client extends Person{
 		
 	}
 	
-	public Client(String name, int age, String gender, String number, String address, String email, int size){
+	public Client(String name, int age, String gender, String number, String address, String email, Account account,int size){
 		super(name,age,gender,number,address);
 		this.email = email;
 		this.mails = new Mail[size];
@@ -35,6 +35,7 @@ public class Client extends Person{
 		this.upcomingMatches = new Match[size];
 		this.purchaseHistory = new Ticket[size];
 		this.isDisable = false;
+		this.account = account;
 	}
 	
 	
