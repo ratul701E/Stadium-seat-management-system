@@ -1,17 +1,13 @@
-import java.awt.Menu;
+
 
 public class Management {
 	public static void ManageMatch(Match match) {
 		int choice;
 		while(true) {
-			System.out.print("\t\t==== Manage Match  ====\n\n" // ( Match ID : " + match.getId() + " )
-					+ "1. Change description\n"
-					+ "2. Change match type\n"
-					+ "3. Change Match Day\n"
-					+ "4. Change/modify vip seat number\n"
-					+ "5. Change/modify normal seat numbers\n"
-					+ "6. Change validity\n"
-					+ "0. Exit \n>>");
+			
+			// manage match menu
+			
+			Menu.menus.matchControlMenu();
 			
 			choice = Integer.parseInt(Database.scanner.nextLine());
 			
@@ -41,13 +37,10 @@ public class Management {
 			case 4: {
 				while(true) {
 					do {
-						System.out.println("\t\t==== Vip Seat Management (seat : " + match.getVipSeats() + " ) ====\n\n"
-								+ "1. Add seat(s)\n"
-								+ "2. Change total seat\n"
-								+ "3. Remove seat\n"
-								+ "4. Make empty\n"
-								+ "0. Exit\n"
-								+ " >> ");
+						
+						// vip seat management menu
+						Menu.menus.vipSeatManage(match.getVipSeats());
+						
 						choice = Integer.parseInt(Database.scanner.nextLine());
 					}while(!(choice >= 0 && choice < 5));
 					
@@ -86,13 +79,9 @@ public class Management {
 			case 5: {
 				while(true) {
 					do {
-						System.out.println("\t\t==== Normal Seat Management (seat : " + match.getNormalSeats() + " ) ====\n\n"
-								+ "1. Add seat(s)\n"
-								+ "2. Change total seat\n"
-								+ "3. Remove seat\n"
-								+ "4. Make empty\n"
-								+ "0. Exit\n"
-								+ " >> ");
+						
+						Menu.menus.normalSeatManage(match.getNormalSeats());
+						
 						choice = Integer.parseInt(Database.scanner.nextLine());
 					}while(!(choice >= 0 && choice < 5));
 					
@@ -155,12 +144,9 @@ public class Management {
 		int choice;
 		
 		while(true) {
-			System.out.println("\t\t==== Ticket Manager ====\n\n"
-					+ "1. Change ID (be careful)\n"
-					+ "2. Change seat quantites\n"
-					+ "3. Change Price\n"
-					+ "0. Exit\n"
-					+ ">> ");
+			
+			Menu.menus.ticketManageMenu();
+			
 			choice = Integer.parseInt(Tools.getInput(null));
 			
 			switch(choice) {
@@ -200,18 +186,11 @@ public class Management {
 			
 			client.shortProfile();
 			
-			System.out.println(
-					 "1. Change name\n"
-					+ "2. Change Age\n"
-					+ "3. Change Gender\n"
-					+ "4. Change number\n"
-					+ "5. Change Address\n"
-					+ "6. Change Email\n"
-					+ "7. Change Account Informations\n"
-					+ "8. Manage Tickets\n"
-					+ "0. Exit\n");
+			// client management menu
 			
-			Tools.selectMenu();
+			Menu.menus.clientManagementMenu();
+			
+			Menu.menus.selectMenu();
 			
 			choice = Integer.parseInt(Tools.getInput(null));
 			
@@ -259,11 +238,10 @@ public class Management {
 				case 7:{
 					
 					Menu : while(true) {
-						System.out.println("\t\t==== Manage Account (Available alance :" + client.getAccount().getBalance() + ")====\n\n"
-								+ "1. Change Balance (sensitive)\n"
-								+ "2. Withdrow Money\n"
-								+ "0. Exit\n"
-								+ ">> ");
+						
+						// manage account menu
+						Menu.menus.accountManageMenu(client.getAccount().getBalance());
+						
 						choice = Integer.parseInt(Tools.getInput(null));
 						switch(choice) {
 							case 0 :{
@@ -293,7 +271,9 @@ public class Management {
 					
 					while(true) {
 							client.showAllTickets();
-							Tools.selectMenu();
+							
+							Menu.menus.selectMenu();
+							
 							choice = Integer.parseInt(Tools.getInput(null));
 							if(choice == 0) {
 								break;
@@ -320,6 +300,40 @@ public class Management {
 			}
 		}
 	}
+	
+	//
+	
+	
+	public static void manageAccount(Account account) {
+		while(true) {
+			Menu.menus.accountManageMenu(account.getBalance());
+			int choice = Integer.parseInt(Tools.getInput(null));
+			
+			switch(choice) {
+				case 0:{
+					return;
+				}
+				
+				case 1:{
+					System.out.println("Current balance is : " + account.getBalance());
+					account.setBalance(Double.parseDouble(Tools.getInput("Enter new balance")));
+					break;
+				}
+				
+				case 2:{
+					account.deposid(Double.parseDouble(Tools.getInput("Entere amaunt")));
+					break;
+				}
+				
+				default:{
+					System.out.println("Invalid choice");
+				}
+			}
+		}
+		
+		
+	}
+	
 	
 	//
 	

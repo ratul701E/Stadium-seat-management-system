@@ -21,9 +21,11 @@ public class Admin extends Person{
 		
 	}
 	
-	public Admin(String name, int age, String gender, String number, String address, String email, int size) {
+	public Admin(String name, int age, String gender, String number, String address, String email, String username, String password, int size) {
 		super(name,age,gender,number,address);
 		this.email = email;
+		this.username = username;
+		this.password = password;
 		this.mails = new Mail[size];
 		this.feedbacks = new Feedback[size];
 		this.notifications = new Notification[size];
@@ -135,9 +137,13 @@ public class Admin extends Person{
 	// ------------------------- managements
 	
 	
+	/*
 	public void manageTickets() {
 		
+		//Management.manageTicket(null);
 	}
+	*/
+	
 	
 	public void manageClients() {
 
@@ -149,7 +155,7 @@ public class Admin extends Person{
 			Database.showAllMatches();
 			System.out.println("0. Exit");
 			
-			Tools.selectMenu();
+			Menu.menus.selectMenu();
 			
 			choice = Integer.parseInt(Tools.getInput(""));
 			if(choice == 0) return;
@@ -159,8 +165,9 @@ public class Admin extends Person{
 				match = Database.matches[choice-1];
 				if(Database.matches[choice-1] == null) throw new Exception();
 			}catch (Exception e) {
-				System.out.println("Invalid choise.. Press enter to continue");
-				Database.scanner.nextLine();
+				
+				Tools.etoc();
+				
 				continue;
 			}
 			
@@ -168,6 +175,10 @@ public class Admin extends Person{
 			
 		}
 		
+	}
+	
+	public void addMatch() {
+		Database.createMatch();
 	}
 	
 	
@@ -179,7 +190,6 @@ public class Admin extends Person{
 			
 		}
 	}
-	
 
 	
 }

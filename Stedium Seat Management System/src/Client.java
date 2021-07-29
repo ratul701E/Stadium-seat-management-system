@@ -95,6 +95,10 @@ public class Client extends Person{
 	// lists
 	
 	public void showAllTickets() {
+		if(this.countTickets() == 0) {
+			Menu.menus.emptyMenu();
+			return;
+		}
 		for(int i = 0; i < tickets.length; i++) {
 			if(tickets[i] != null) {
 				System.out.print((i+1) + ". ");
@@ -103,6 +107,13 @@ public class Client extends Person{
 		}
 	}
 	
+	public Ticket[] getCancelledTickets() {
+		return cancelledTickets;
+	}
+	
+	public Ticket[] getPurchasedTickets() {
+		return purchaseHistory;
+	}
 	// ------------------------- adds
 	
 	
@@ -231,6 +242,32 @@ public class Client extends Person{
 	}
 	
 	
+	// search
+	
+	public Ticket searchTicket(String id) {
+		for(int i = 0; i < tickets.length; i++) {
+			if(tickets[i]!= null ) {
+				if(tickets[i].getId().equals(id)) {
+					return tickets[i];
+				}
+			}
+		}
+		return null;
+	}
+	
+	// counts
+	
+	public int countTickets() {
+		int count = 0;
+		for(int i = 0; i < tickets.length; i++) {
+			if(tickets[i]!= null ) {
+				count++;
+			}
+		}
+		
+		return count;
+	}
+	
 	// shows
 	
 	public void shortProfile() {
@@ -238,6 +275,7 @@ public class Client extends Person{
 		System.out.println("Age : " + getAge());
 		System.out.println("Gender : " + getGender());
 		System.out.println("Address : " + getAddress());
+		System.out.println("Email : " + email);
 		System.out.println("\n\n");
 	}
 }

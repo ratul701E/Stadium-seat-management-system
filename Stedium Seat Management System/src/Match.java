@@ -11,6 +11,7 @@ public class Match {
 	private double vipCost;
 	private double normalCost;
 	private boolean isValid;
+	private Client clients[];
 	
 	
 	// constructors
@@ -25,11 +26,16 @@ public class Match {
 		this.vipSeats = vipSeats;
 		this.normalSeats = normalSeats;
 		this.matchId();
+		this.clients = new Client[200];
 	}
 	
-	public Match(String matchType, int vipSeats, int normalSeats, String matchDay) {
+	public Match(String id, String matchDay, String description, String matchType, int vipSeats, int normalSeats, int vipCost, int normalCost) {
 		this(matchType, vipSeats, normalSeats);
 		this.matchDay = matchDay;
+		this.description = description;
+		this.id = id;
+		this.vipCost = vipCost;
+		this.normalCost = normalCost;
 	}
 	
 	
@@ -70,6 +76,7 @@ public class Match {
 	public void setNormalCost(double cost) {
 		normalCost = cost;
 	}
+	
 	
 	
 	// gets
@@ -126,6 +133,16 @@ public class Match {
 		normalSeats += seats;
 	}
 	
+	public boolean addClient(Client client) {
+		for(int i = 0; i < clients.length; i++) {
+			if(clients[i]== null ) {
+				clients[i]= client; 
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	// remove seats
 	
 	public void removeVipSeats(int seats) {
@@ -137,6 +154,18 @@ public class Match {
 		if(seats < 0) return;
 		normalSeats -= seats;
 	}
+	
+	
+	public boolean removeClient(Client client) {
+		for(int i = 0; i < clients.length; i++) {
+			if(clients[i]== client ) {
+				clients[i]= null; 
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	
 	// shows
 	

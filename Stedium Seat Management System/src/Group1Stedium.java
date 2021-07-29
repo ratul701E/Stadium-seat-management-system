@@ -3,19 +3,41 @@ public class Group1Stedium {
 	
 	
 	public void startServer() {
-		
+		int choice;
+		while(true) {
+			
+			Menu.menus.portalMenu();
+			
+			choice = Integer.parseInt(Tools.getInput(null));
+			
+			switch(choice) {
+			
+				case 1 : {
+					this.login();
+					break;
+				}
+				
+				case 2 : {
+					this.signup();
+					break;
+				}
+				
+				case 3 : {
+					// Group1Stedium.aboutUs();
+					break;
+				}
+			}
+		}
 	}
 	
 	
 	
 	
-	public static void login() {
+	private void login() {
 		
 		while(true) {
-			System.out.println("\t\t==== Log in Menu ====\n\n"
-					+ "1. Client login\n"
-					+ "2. Admin login\n"
-					+ ">> ");
+			
+			Menu.menus.loginMenu();
 			
 			int choice = Integer.parseInt(Tools.getInput(null));
 			
@@ -25,13 +47,16 @@ public class Group1Stedium {
 					username = Tools.getInput("Username");
 					password = Tools.getInput("Password");
 					
-					if(Database.isExistUser(username, password) == 2) {
+					if(Database.isExistClinet(username, password) == 2) {
 						System.out.println("logged in");
 						
+						//
+						this.accessUser(username);
+						//
 						
-						// break mandatory
+						 break;
 						
-					}else if(Database.isExistUser(username, password) == 1) {
+					}else if(Database.isExistClinet(username, password) == 1) {
 						System.out.println("Invalid password");
 					}else {
 						System.out.println("No user found");
@@ -41,11 +66,30 @@ public class Group1Stedium {
 				}
 				
 				case 2: {
-					
-					if(Database.isAdmin(Tools.getInput("Username"), Tools.getInput("Password"))) {
-						//acces admin
+					String username = Tools.getInput("Username");
+					String password = Tools.getInput("Password");
+					if(Database.isAdmin(username,password)) {
+						System.out.println("logged in");
+						
+						this.accessAdmin(username);
+						
 					}
 					
+					else {
+						System.out.println("This account dosen't exist or not a admin account");
+					}
+					
+					break;
+					
+				}
+				
+				case 0:{
+					
+					return;
+				}
+				
+				default : {
+					System.out.println("Invaild.. try again");
 				}
 			}
 		}
@@ -54,11 +98,28 @@ public class Group1Stedium {
 	//
 	
 	
-	public static void signup() {
+	private void signup() {
 		String name, gender, number, address, email, username, password;
+		boolean isAdmin = false;
+		
 		
 		int age;
 		System.out.println("\t\t==== Signup Page ====\n");
+		
+		while(true) {
+			System.out.print("1. As client\n"
+					+ "2. As admin\n"
+					+ ">> ");
+			int choice = Integer.parseInt(Tools.getInput(null));
+			if(choice == 2) {
+				isAdmin = true;
+				break;
+			}
+			else if(choice != 1) {
+				System.out.println("Invalid choice");
+			}
+			else break;
+		}
 		
 		name = Tools.getInput("Enter your name*");
 		age = Integer.parseInt(Tools.getInput("Enter your age*"));
@@ -68,7 +129,7 @@ public class Group1Stedium {
 		email = Tools.getInput("Enter your email*");
 		
 		while(true) {
-			username = Tools.getInput(("Enter your username* : "));
+			username = Tools.getInput(("Enter your username*"));
 			if(!Database.isUsernameExist(username)) {
 				break;
 			}
@@ -78,7 +139,10 @@ public class Group1Stedium {
 		
 		password = Tools.getInput("Enter your password");
 		
-		Database.addClient(new Client(name,age,gender,number,address,email,username, password, new Account(500), 200));
+		if(isAdmin) {
+			Database.addAdmin(new Admin(name,age,gender,number,address,email,username, password, 200));
+		}
+		else Database.addClient(new Client(name,age,gender,number,address,email,username, password, new Account(5000), 200));
 		System.out.println("Account created successfully");
 		
 		// enter to continue
@@ -88,9 +152,7 @@ public class Group1Stedium {
 	
 	
 	private Ticket bookTicket(Client client, Match match) {
-		Ticket ticket;
-		
-		
+
 		
 		System.out.println("\t\t==== Welcome to Ticket Counter====\n\n");
 		match.fullDetails();
@@ -132,5 +194,197 @@ public class Group1Stedium {
 		}
 		return null;
 		
+	}
+	
+	
+	//
+	
+	private void accessUser(String username) {
+		Client client = Database.getClinet(username);
+		
+		MenuLabel : while(true) {
+			Menu.menus.clientInterface();
+			int choice = Integer.parseInt(Tools.getInput(null));
+			
+			switch(choice) {
+				case 0 :{
+					break MenuLabel;
+				}
+				
+				case 1 :{
+					
+					innerMenu: while(true) {
+						client.showAllTickets();
+						
+						System.out.print("\n1. Cancel ticket\n"
+								+ "0. Back\n"
+								+ ">> ");
+						choice = Integer.parseInt(Tools.getInput(null));
+						
+						switch(choice) {
+							case 1:{
+								System.out.println("Enter ID : ");
+								Ticket ticket = client.searchTicket(Tools.getInput(null));
+								if(ticket != null) {
+									if(client.removeTicket(ticket)) {
+										System.out.println("Cancelled");
+										client.addToCancelledTicket(ticket);
+									} else {
+										System.out.println("Can't cancel");
+									}
+								}
+								else {
+									System.out.println("Invalid ID");
+								}
+								
+								
+							}
+							
+							case 0:{
+								break innerMenu;
+							}
+							
+							default: {
+								System.out.println("Invalid choice");
+							}
+						}
+					}
+					
+					break;
+				}
+				
+				case 2 :{
+					
+					Database.showAllMatches();
+					
+					String id = Tools.getInput("Enter match id");
+					
+					if(Database.searchMatch(id) == null) {
+						System.out.println("Invalid id");
+					}
+					else {
+						Ticket ticket = this.bookTicket(client,Database.searchMatch(id));
+						client.addTicket(ticket);
+						client.addToPurchaseHistory(ticket);
+						
+					}
+					
+					break;
+				}
+				
+				case 3 :{
+					Ticket cancelledTickets[] = client.getCancelledTickets();
+					for(int i = 0; i < cancelledTickets.length; i++) {
+						if(cancelledTickets[i]!= null ) {
+							cancelledTickets[i].showTicket();
+						}
+					}
+					break;
+				}
+				
+				case 4 :{
+					
+					Ticket purchasedTickets[] = client.getPurchasedTickets();
+					for(int i = 0; i < purchasedTickets.length; i++) {
+						if(purchasedTickets[i]!= null ) {
+							purchasedTickets[i].showTicket();
+						}
+					}
+					
+					break;
+				}
+				
+				case 5 :{
+					
+					//notifications
+					
+					break;
+				}
+				
+				case 6 :{
+					
+					//Account
+					System.out.println("Account balance : " + client.getAccount().getBalance());
+					Tools.etoc();
+					
+					break;
+				}
+				
+				case 7 :{
+					
+					//Mails
+					
+					break;
+				}
+				
+				default : {
+					
+					
+				}
+			}
+		}
+		
+	}
+	
+	//
+	
+	private void accessAdmin(String username) {
+		Admin admin = Database.getAdmin(username);
+		
+		while(true) {
+			Menu.menus.adminInterface();
+			
+			int choice = Integer.parseInt(Tools.getInput(null));
+			
+			switch(choice) {
+				case 0 : {
+					// logout
+					return;
+
+				}
+				
+				case 1 : {
+					// add match
+					
+					Database.createMatch();
+					
+					break;
+				}
+				
+				case 2 : {
+					// manage clients
+					while(true) {
+						Database.showAllClients();
+						
+						String TempUsername = Tools.getInput("Enter client username (type exit to exit)");
+						if(TempUsername.equalsIgnoreCase("exit")) {
+							break;
+						}
+						Client  client= Database.getClinet(TempUsername);
+						if(client != null) {
+							Management.manageClient(client);
+						}
+						else {
+							System.out.println("Invalid username");
+						}
+					}
+					
+					break;
+				}
+				
+				case 3 : {
+					// mailings
+					
+					break;
+				}
+				
+				case 4 : {
+					// notifications
+					
+					
+					break;
+				}
+			}
+		}
 	}
 }

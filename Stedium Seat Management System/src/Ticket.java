@@ -34,6 +34,10 @@ public class Ticket {
 		this.price = price;
 	}
 	
+	public void setType(String type) {
+		this.type = type;
+	}
+	
 	//gets
 	
 	public String getId() {
@@ -46,6 +50,17 @@ public class Ticket {
 	
 	public double getPrice() {
 		return price;
+	}
+	
+	public String getType() {
+		return type;
+	}
+	
+	// shows
+	
+	public void showTicket() {
+		System.out.println("ID : " + ID + "\n"
+				+ "Type : " + type);
 	}
 	
 }

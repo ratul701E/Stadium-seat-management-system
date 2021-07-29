@@ -1,3 +1,4 @@
+import java.io.IOException;
 
 public class Tools {
 	public static String getInput(String message) {
@@ -14,15 +15,23 @@ public class Tools {
 	}
 	
 	
+	public static void etoc() {
+		System.out.println("Invalid choise.. Press enter to continue");
+		Database.scanner.nextLine();
+	}
 	
 	
+	public static void clear() {
+		try {
+			Runtime.getRuntime().exec("cls");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	
 	//menus
 	
-	public static void selectMenu() {
-		System.out.println("\nSelect one to modify");
-		System.out.print("_exit key 0_ >> ");
-	}
+
 }
