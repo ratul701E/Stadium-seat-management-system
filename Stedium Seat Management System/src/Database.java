@@ -213,6 +213,17 @@ public class Database {
 		return null;
 	}
 	
+	public static Client searchByEmail(String email) {
+		for(int i = 0; i < clients.length; i++) {
+			if(clients[i]!= null ) {
+				if(clients[i].getEmail().equals(email)) {
+					return clients[i];
+				}
+			}
+		}
+		return null;
+	}
+	
 	
 	// counts
 	public int countClients() {

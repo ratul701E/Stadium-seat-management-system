@@ -22,11 +22,13 @@ public class Tools {
 	
 	
 	public static void clear() {
+		/*
 		try {
 			Runtime.getRuntime().exec("cls");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		*/
 	}
 	
 	

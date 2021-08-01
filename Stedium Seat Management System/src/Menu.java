@@ -1,5 +1,5 @@
 
-public class Menu implements UserInterface {
+public class Menu{
 	
 	public static Menu menus = new Menu();
 	

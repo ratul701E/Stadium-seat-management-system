@@ -4,7 +4,7 @@
  * 
  */
 
-public class Admin extends Person{
+public class Admin extends Person implements IAdminInterface{
 	private String email;
 	private String username;
 	private String password;
@@ -77,7 +77,7 @@ public class Admin extends Person{
 		return false;
 	}
 	
-	public boolean addMail(Mail mail) {
+	public static boolean addMail(Mail mail) {
 		for(int i = 0; i < mails.length; i++) {
 			if(mails[i]== null ) {
 				mails[i] = mail;

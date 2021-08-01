@@ -273,7 +273,14 @@ public class Group1Stedium {
 				}
 				
 				case 3 :{
+					
 					Ticket cancelledTickets[] = client.getCancelledTickets();
+					
+					if(client.countCancelldTickets() == 0) {
+						Menu.menus.emptyMenu();
+						break;
+					}
+					
 					for(int i = 0; i < cancelledTickets.length; i++) {
 						if(cancelledTickets[i]!= null ) {
 							cancelledTickets[i].showTicket();
@@ -285,6 +292,12 @@ public class Group1Stedium {
 				case 4 :{
 					
 					Ticket purchasedTickets[] = client.getPurchasedTickets();
+					
+					if(client.countPurchedTickets() == 0) {
+						Menu.menus.emptyMenu();
+						break;
+					}
+					
 					for(int i = 0; i < purchasedTickets.length; i++) {
 						if(purchasedTickets[i]!= null ) {
 							purchasedTickets[i].showTicket();
@@ -312,7 +325,77 @@ public class Group1Stedium {
 				
 				case 7 :{
 					
-					//Mails
+					menuLoop: while(true) {
+						System.out.print("\t\t==== Mail ====\n\n"
+								+ "1. Inbox\n"
+								+ "2. Mail to Admin\n"
+								+ "3. Mail to another Client\n"
+								+ ">> ");
+						
+						choice = Integer.parseInt(Tools.getInput(null));
+						
+						switch(choice) {
+							case 0 :{
+								break menuLoop;
+							}
+							
+							case 1 : {
+								
+								if(client.countAllMails() == 0) {
+									Menu.menus.emptyMenu();
+									Tools.etoc();
+									break;
+								}
+								
+								Mail emails[] = client.getAllMails();
+								
+								for(int i = emails.length -1 ; i >= 0; i++) {
+									if(emails[i]!= null ) {
+										emails[i].showDetails();
+									}
+								}
+								Tools.etoc();
+							}
+							
+							case 2 :{
+								String message;
+								message = Tools.getInput("Enter your message");
+								
+								Admin.addMail(new Mail(client.getEmail(), message));
+								
+								System.out.println("Email sent successfully");
+								Tools.etoc();
+								
+								break;
+								
+
+							}
+							
+							case 3 :{
+								String message;
+								String recEmail;
+								recEmail = Tools.getInput("Enter receiver email");
+								message = Tools.getInput("Enter your message");
+								
+								Client receiver = Database.searchByEmail(recEmail);
+								if(receiver == null) {
+									System.out.println("Invalid receiver email.");
+									Tools.etoc();
+								}
+								else {
+									receiver.addMail(new Mail(client.getEmail(), message));
+									System.out.println("Email sent successfully");
+									Tools.etoc();
+								}
+								
+								break;
+							}
+							
+							default :{
+								System.out.println("Invalid choice");
+							}
+						}
+					}
 					
 					break;
 				}

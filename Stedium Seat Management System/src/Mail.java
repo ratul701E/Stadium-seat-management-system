@@ -28,5 +28,6 @@ public class Mail{
 	public void showDetails(){
 		System.out.println("Sender : "+sender);
 		System.out.println("Message : "+message);
+		System.err.println("-----------------------------------------------");
 	}
 }

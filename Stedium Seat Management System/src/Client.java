@@ -5,7 +5,7 @@
  * 
  */
 
-public class Client extends Person{
+public class Client extends Person implements IClientInterface{
 	private String username;
 	private String password;
 	private String email;
@@ -91,6 +91,10 @@ public class Client extends Person{
 		return tickets[index];
 	}
 	
+	public Mail[] getAllMails() {
+		return mails;
+	}
+	
 	
 	// lists
 	
@@ -106,6 +110,7 @@ public class Client extends Person{
 			}
 		}
 	}
+	
 	
 	public Ticket[] getCancelledTickets() {
 		return cancelledTickets;
@@ -261,6 +266,38 @@ public class Client extends Person{
 		int count = 0;
 		for(int i = 0; i < tickets.length; i++) {
 			if(tickets[i]!= null ) {
+				count++;
+			}
+		}
+		
+		return count;
+	}
+	
+	public int countAllMails() {
+		int count = 0;
+		for(int i = 0; i < mails.length; i++) {
+			if(mails[i]!= null ) {
+				count++;
+			}
+		}
+		return count;
+	}
+	
+	public int countCancelldTickets() {
+		int count = 0;
+		for(int i = 0; i < cancelledTickets.length; i++) {
+			if(cancelledTickets[i]!= null ) {
+				count++;
+			}
+		}
+		
+		return count;
+	}
+	
+	public int countPurchedTickets() {
+		int count = 0;
+		for(int i = 0; i < purchaseHistory.length; i++) {
+			if(purchaseHistory[i]!= null ) {
 				count++;
 			}
 		}
