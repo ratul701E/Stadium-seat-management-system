@@ -1,3 +1,11 @@
+package Users;
+import Interfaces.IClientInterface;
+import Menus.Menu;
+import StediumStuffs.Account;
+import StediumStuffs.Mail;
+import StediumStuffs.Match;
+import StediumStuffs.Notification;
+import StediumStuffs.Ticket;
 
 /*
  * This class is written by Asraful Alam Ratul
@@ -10,6 +18,7 @@ public class Client extends Person implements IClientInterface{
 	private String password;
 	private String email;
 	private boolean isDisable;
+	private boolean newMails;
 	private Account account;
 	private Mail mails[];
 	private Notification notifications[];
@@ -25,7 +34,7 @@ public class Client extends Person implements IClientInterface{
 		
 	}
 	
-	public Client(String name, int age, String gender, String number, String address, String email,String username, String password, Account account,int size){
+	public Client(String name, int age, String gender, String number, String address, String email,String username, String password, Account account){
 		super(name,age,gender,number,address);
 		this.email = email;
 		this.mails = new Mail[size];
@@ -38,6 +47,7 @@ public class Client extends Person implements IClientInterface{
 		this.account = account;
 		this.username = username;
 		this.password = password;
+		this.newMails = false;
 	}
 	
 	
@@ -92,9 +102,13 @@ public class Client extends Person implements IClientInterface{
 	}
 	
 	public Mail[] getAllMails() {
+		newMails = false;
 		return mails;
 	}
 	
+	public boolean newMails() {
+		return newMails;
+	}
 	
 	// lists
 	
@@ -123,6 +137,7 @@ public class Client extends Person implements IClientInterface{
 	
 	
 	public boolean addMail(Mail mail) {
+		newMails = true;
 		for(int i = 0; i < mails.length; i++) {
 			if(mails[i]== null ) {
 				mails[i] = mail;

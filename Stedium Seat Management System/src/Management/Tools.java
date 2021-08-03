@@ -1,4 +1,7 @@
+package Management;
 import java.io.IOException;
+
+import Database.Database;
 
 public class Tools {
 	public static String getInput(String message) {
@@ -16,7 +19,7 @@ public class Tools {
 	
 	
 	public static void etoc() {
-		System.out.println("Invalid choise.. Press enter to continue");
+		System.out.println("Press enter to continue. . .");
 		Database.scanner.nextLine();
 	}
 	

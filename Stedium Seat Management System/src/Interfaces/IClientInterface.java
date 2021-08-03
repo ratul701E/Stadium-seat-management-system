@@ -1,6 +1,12 @@
-
+package Interfaces;
+import StediumStuffs.Mail;
+import StediumStuffs.Match;
+import StediumStuffs.Notification;
+import StediumStuffs.Ticket;
 
 public interface IClientInterface {
+	
+	public static final int size = 200;
 	
 	public Ticket[] getCancelledTickets();
 	public Ticket[] getPurchasedTickets();

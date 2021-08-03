@@ -1,4 +1,10 @@
+package Database;
 import java.util.Scanner;
+import Management.*;
+
+import StediumStuffs.Match;
+import Users.Admin;
+import Users.Client;
 
 public class Database {
 	public static Client clients[];

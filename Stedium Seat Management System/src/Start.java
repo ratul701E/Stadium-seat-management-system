@@ -1,8 +1,12 @@
+import Database.Database;
+import StediumStuffs.Account;
+import StediumStuffs.Group1Stedium;
+import Users.Admin;
+import Users.Client;
 
 public class Start {
 
 	public static void main(String[] args) {
-		
 		
 		/*
 		Match match1 = new Match("Cricket", 5,10,"27 oct 2021");
@@ -24,10 +28,12 @@ public class Start {
 		Database.addMatch(match7);
 		
 		*/
-		Client c1 = new Client("Ratul", 20, "Male", "01920221554", "Nandipara", "Ratul@gamil.com","ratul","ratul", new Account(0), 20);
-		Client c2 = new Client("Priya", 20, "Female", "017.......23", "Gazipur", "Priya@gamil.com","asiya","asiya", new Account(0) ,20);
+		Client c1 = new Client("Ratul", 20, "Male", "01920221554", "Nandipara", "Ratul@gmail.com","ratul","ratul", new Account(0));
+		Client c2 = new Client("Priya", 20, "Female", "017.......23", "Gazipur", "Priya@gmail.com","asiya","asiya", new Account(0));
+		Admin a1= new Admin("Rian", 20, "Male", "017.......23", "Gazipur", "Rian@gmail.com","rian","rian");
 		Database.addClient(c2);
 		Database.addClient(c1);
+		Database.addAdmin(a1);
 		/*
 		//Ticket t1 = new Ticket("2136", 5, 550,1);
 		//c2.addTicket(t1);

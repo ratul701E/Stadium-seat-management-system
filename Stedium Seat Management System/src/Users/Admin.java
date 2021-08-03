@@ -1,3 +1,14 @@
+package Users;
+import Database.Database;
+import Interfaces.IAdminInterface;
+import Management.Management;
+import Management.Tools;
+import Menus.Menu;
+import StediumStuffs.Feedback;
+import StediumStuffs.Mail;
+import StediumStuffs.Match;
+import StediumStuffs.Notification;
+
 /*
  * This class is written by Asraful Alam Ratul
  * ID : 21-44588-1
@@ -8,10 +19,20 @@ public class Admin extends Person implements IAdminInterface{
 	private String email;
 	private String username;
 	private String password;
+	private static boolean newMails;
 	private static Feedback feedbacks[];
 	private static Mail mails[];
 	private static Notification notifications[];
 	
+	
+	
+	static {
+		
+		mails = new Mail[size];
+		feedbacks = new Feedback[size];
+		notifications = new Notification[size];
+		newMails = false;
+	}
 	
 	
 	// ------------------------- constructors
@@ -21,14 +42,12 @@ public class Admin extends Person implements IAdminInterface{
 		
 	}
 	
-	public Admin(String name, int age, String gender, String number, String address, String email, String username, String password, int size) {
+	public Admin(String name, int age, String gender, String number, String address, String email, String username, String password) {
 		super(name,age,gender,number,address);
 		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.mails = new Mail[size];
-		this.feedbacks = new Feedback[size];
-		this.notifications = new Notification[size];
+		
 	}
 	
 	
@@ -63,6 +82,16 @@ public class Admin extends Person implements IAdminInterface{
 		return password;
 	}
 	
+	public Mail[] getAllMails() {
+		newMails = false;
+		return mails;
+	}
+	
+	public boolean newMails() {
+		return newMails;
+	}
+	
+	
 	// ------------------------- adds
 	
 	
@@ -78,6 +107,7 @@ public class Admin extends Person implements IAdminInterface{
 	}
 	
 	public static boolean addMail(Mail mail) {
+		newMails = true;		
 		for(int i = 0; i < mails.length; i++) {
 			if(mails[i]== null ) {
 				mails[i] = mail;
@@ -189,6 +219,19 @@ public class Admin extends Person implements IAdminInterface{
 		for(int i = 0; i< mails.length; i++) {
 			
 		}
+	}
+	
+	// counts
+	
+	
+	public int countAllMails() {
+		int count = 0;
+		for(int i = 0; i < mails.length; i++) {
+			if(mails[i]!= null ) {
+				count++;
+			}
+		}
+		return count;
 	}
 
 	

@@ -1,5 +1,11 @@
+package Interfaces;
+
+import StediumStuffs.*;
 
 public interface IAdminInterface {
+	
+	public static final int size = 200;
+	
 	
 	public boolean addFeedbacks(Feedback feedback);
 	

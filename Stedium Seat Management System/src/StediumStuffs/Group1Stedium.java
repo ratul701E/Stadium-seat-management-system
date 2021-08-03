@@ -1,3 +1,10 @@
+package StediumStuffs;
+import Database.Database;
+import Management.Management;
+import Management.Tools;
+import Menus.Menu;
+import Users.Admin;
+import Users.Client;
 
 public class Group1Stedium {
 	
@@ -140,9 +147,9 @@ public class Group1Stedium {
 		password = Tools.getInput("Enter your password");
 		
 		if(isAdmin) {
-			Database.addAdmin(new Admin(name,age,gender,number,address,email,username, password, 200));
+			Database.addAdmin(new Admin(name,age,gender,number,address,email,username, password));
 		}
-		else Database.addClient(new Client(name,age,gender,number,address,email,username, password, new Account(5000), 200));
+		else Database.addClient(new Client(name,age,gender,number,address,email,username, password, new Account(5000)));
 		System.out.println("Account created successfully");
 		
 		// enter to continue
@@ -173,7 +180,13 @@ public class Group1Stedium {
 				int seatCount = Integer.parseInt(Tools.getInput("How many seat you want"));
 				
 				if(Management.canBuy(client, match.getVipCost()*seatCount)) {
+					match.removeVipSeats(seatCount);
+					System.out.println("Booked");
 					return new Ticket(match.getId(), seatCount, seatCount*match.getVipCost(),1);
+					
+				}
+				else {
+					System.out.println("Conditions not matched. Check balance.");
 				}
 				break;
 			}
@@ -182,7 +195,12 @@ public class Group1Stedium {
 				int seatCount = Integer.parseInt(Tools.getInput("How many seat you want"));
 				
 				if(Management.canBuy(client, match.getNormalCost()*seatCount)) {
+					match.removeNormalSeats(seatCount);
+					System.out.println("Booked");
 					return new Ticket(match.getId(), seatCount, seatCount*match.getNormalCost(),2);
+				}
+				else {
+					System.out.println("Conditions not matched. Check balance.");
 				}
 				break;
 			}
@@ -203,7 +221,7 @@ public class Group1Stedium {
 		Client client = Database.getClinet(username);
 		
 		MenuLabel : while(true) {
-			Menu.menus.clientInterface();
+			Menu.menus.clientInterface(client.newMails());
 			int choice = Integer.parseInt(Tools.getInput(null));
 			
 			switch(choice) {
@@ -326,11 +344,8 @@ public class Group1Stedium {
 				case 7 :{
 					
 					menuLoop: while(true) {
-						System.out.print("\t\t==== Mail ====\n\n"
-								+ "1. Inbox\n"
-								+ "2. Mail to Admin\n"
-								+ "3. Mail to another Client\n"
-								+ ">> ");
+						
+						Menu.menus.mailMenu();
 						
 						choice = Integer.parseInt(Tools.getInput(null));
 						
@@ -341,6 +356,8 @@ public class Group1Stedium {
 							
 							case 1 : {
 								
+								System.out.println("\t\t==== Inbox ====\n\n");
+								
 								if(client.countAllMails() == 0) {
 									Menu.menus.emptyMenu();
 									Tools.etoc();
@@ -349,12 +366,13 @@ public class Group1Stedium {
 								
 								Mail emails[] = client.getAllMails();
 								
-								for(int i = emails.length -1 ; i >= 0; i++) {
+								for(int i = emails.length -1 ; i >= 0; i--) {
 									if(emails[i]!= null ) {
 										emails[i].showDetails();
 									}
 								}
 								Tools.etoc();
+								break;
 							}
 							
 							case 2 :{
@@ -415,7 +433,7 @@ public class Group1Stedium {
 		Admin admin = Database.getAdmin(username);
 		
 		while(true) {
-			Menu.menus.adminInterface();
+			Menu.menus.adminInterface(admin.newMails());
 			
 			int choice = Integer.parseInt(Tools.getInput(null));
 			
@@ -457,6 +475,65 @@ public class Group1Stedium {
 				
 				case 3 : {
 					// mailings
+					
+					innerMenu : while(true) {
+						
+						System.out.print("\t\t==== Mailing ====\n\n"
+								+ "1. Inbox\n"
+								+ "2. Mail to client\n"
+								+ "0. Back\n"
+								+ ">> ");
+						choice = Integer.parseInt(Tools.getInput(null));
+						
+						switch(choice) {
+							case 0 : {
+								// back
+								break innerMenu;
+							}
+							
+							case 1 : {
+								//inbox
+								
+								if(admin.countAllMails() == 0) {
+									Menu.menus.emptyMenu();
+								}
+								else {
+									Mail mails[] = admin.getAllMails();
+									for(int i = mails.length -1 ; i >= 0; i--) {
+										if(mails[i]!= null) {
+											mails[i].showDetails();
+										}
+									}
+								}
+								
+								Tools.etoc();
+								break;
+							}
+							
+							case 2 : {
+								//mail to client
+								
+								String message;
+								String recEmail;
+								recEmail = Tools.getInput("Enter receiver email");
+								message = Tools.getInput("Enter your message");
+								
+								Client receiver = Database.searchByEmail(recEmail);
+								if(receiver == null) {
+									System.out.println("Invalid receiver email.");
+									Tools.etoc();
+								}
+								else {
+									receiver.addMail(new Mail(admin.getEmail(), message,true));
+									System.out.println("Email sent successfully");
+									Tools.etoc();
+								}
+								
+								break;
+							}
+						}
+						
+					}
 					
 					break;
 				}

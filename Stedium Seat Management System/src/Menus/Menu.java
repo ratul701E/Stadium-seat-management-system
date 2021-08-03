@@ -1,3 +1,5 @@
+package Menus;
+import Management.Tools;
 
 public class Menu{
 	
@@ -6,7 +8,7 @@ public class Menu{
 	
 	public Menu() {}
 	
-	public void clientInterface() {
+	public void clientInterface(boolean newMails) {
 		System.out.print("\t\t==== Client ====\n\n"
 				+ "1. My tickets\n"
 				+ "2. Buy tickets\n"
@@ -14,17 +16,29 @@ public class Menu{
 				+ "4. Purchase history\n"
 				+ "5. Notifications\n"
 				+ "6. Account information\n"
-				+ "7. Compose mail and inbox\n"
-				+ "0. Logout\n"
+				+ "7. Compose mail and inbox");
+		
+		if(newMails) {
+			System.out.println("  (new!)");
+		}else {
+			System.out.println();
+		}
+				
+				System.out.print("0. Logout\n"
 				+ ">> ");
 	}
 	
-	public void adminInterface() {
+	public void adminInterface(boolean newMails) {
 		System.out.print("\t\t==== Admin Panel ====\n\n"
 				+ "1. Add match\n"
 				+ "2. Manage Clients\n"
-				+ "3. Mailings\n"
-				+ "4. Notifications\n"
+				+ "3. Mailings");
+		if(newMails) {
+			System.out.println("  (new!)");
+		}else {
+			System.out.println();
+		}
+				System.out.print("4. Notifications\n"
 				+ "0. Logout\n"
 				+ ">> ");
 	}
@@ -121,9 +135,19 @@ public class Menu{
 				+ ">> ");
 	}
 	
+	public void mailMenu() {
+		System.out.print("\t\t==== Mail ====\n\n"
+				+ "1. Inbox\n"
+				+ "2. Mail to Admin\n"
+				+ "3. Mail to another Client\n"
+				+ "0. Back\n"
+				+ ">> ");
+	}
+	
 	// design
 	
 	public void emptyMenu() {
+		/*
 		System.out.println(""
 				+ "--------------------------------------------\n"
 				+ "|                                          |\n"
@@ -132,6 +156,9 @@ public class Menu{
 				+ "|                                          |\n"
 				+ "|                                          |\n"
 				+ "--------------------------------------------\n\n");
+		}
+		*/
+		System.out.println("  E  M  P  T  Y\n");
 	}
 	
 }
