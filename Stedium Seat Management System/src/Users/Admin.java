@@ -66,6 +66,10 @@ public class Admin extends Person implements IAdminInterface{
 		this.password = password;
 	}
 	
+	public static void setNewMails(boolean nMails) {
+		newMails = nMails;
+	}
+	
 	
 	// ------------------------- sets
 	
@@ -83,7 +87,6 @@ public class Admin extends Person implements IAdminInterface{
 	}
 	
 	public Mail[] getAllMails() {
-		newMails = false;
 		return mails;
 	}
 	

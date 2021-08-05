@@ -1,10 +1,11 @@
 package StediumStuffs;
+
+
 import Database.Database;
 import Management.Management;
 import Management.Tools;
 import Menus.Menu;
-import Users.Admin;
-import Users.Client;
+import Users.*;
 
 public class Group1Stedium {
 	
@@ -13,9 +14,12 @@ public class Group1Stedium {
 		int choice;
 		while(true) {
 			
+			Tools.clear();
+			
+			
 			Menu.menus.portalMenu();
 			
-			choice = Integer.parseInt(Tools.getInput(null));
+			choice = Tools.getInputI(null);
 			
 			switch(choice) {
 			
@@ -42,11 +46,14 @@ public class Group1Stedium {
 	
 	private void login() {
 		
+		
 		while(true) {
+			
+			Tools.clear();
 			
 			Menu.menus.loginMenu();
 			
-			int choice = Integer.parseInt(Tools.getInput(null));
+			int choice = Tools.getInputI(null);
 			
 			switch (choice) {
 				case 1: {
@@ -106,6 +113,9 @@ public class Group1Stedium {
 	
 	
 	private void signup() {
+		
+		Tools.clear();
+		
 		String name, gender, number, address, email, username, password;
 		boolean isAdmin = false;
 		
@@ -114,10 +124,13 @@ public class Group1Stedium {
 		System.out.println("\t\t==== Signup Page ====\n");
 		
 		while(true) {
+			
+			Tools.clear();
+			
 			System.out.print("1. As client\n"
 					+ "2. As admin\n"
 					+ ">> ");
-			int choice = Integer.parseInt(Tools.getInput(null));
+			int choice = Tools.getInputI(null);
 			if(choice == 2) {
 				isAdmin = true;
 				break;
@@ -129,13 +142,16 @@ public class Group1Stedium {
 		}
 		
 		name = Tools.getInput("Enter your name*");
-		age = Integer.parseInt(Tools.getInput("Enter your age*"));
+		age = Tools.getInputI("Enter your age*");
 		gender = Tools.getInput("Enter your gender*");
 		number = Tools.getInput("Enter your number*");
 		address = Tools.getInput("Enter your address*");
 		email = Tools.getInput("Enter your email*");
 		
 		while(true) {
+			
+			Tools.clear();
+			
 			username = Tools.getInput(("Enter your username*"));
 			if(!Database.isUsernameExist(username)) {
 				break;
@@ -169,7 +185,7 @@ public class Group1Stedium {
 				+ "0. Cancel\n"
 				+ ">> ");
 		
-		int choice = Integer.parseInt(Tools.getInput(null));
+		int choice = Tools.getInputI(null);
 		
 		switch(choice) {
 			case 0:{
@@ -177,30 +193,32 @@ public class Group1Stedium {
 			}
 			
 			case 1:{
-				int seatCount = Integer.parseInt(Tools.getInput("How many seat you want"));
+				// booking vip seats
+				int seatCount = Tools.getInputI("How many seat you want");
 				
-				if(Management.canBuy(client, match.getVipCost()*seatCount)) {
+				if(Management.canBuy(client, match.getVipCost()*seatCount) && match.getVipSeats()>= seatCount) {
 					match.removeVipSeats(seatCount);
 					System.out.println("Booked");
 					return new Ticket(match.getId(), seatCount, seatCount*match.getVipCost(),1);
 					
 				}
 				else {
-					System.out.println("Conditions not matched. Check balance.");
+					Menu.menus.ticketBuyErr();
 				}
 				break;
 			}
 			
 			case 2:{
-				int seatCount = Integer.parseInt(Tools.getInput("How many seat you want"));
+				// booking normal seats
+				int seatCount = Tools.getInputI("How many seat you want");
 				
-				if(Management.canBuy(client, match.getNormalCost()*seatCount)) {
+				if(Management.canBuy(client, match.getNormalCost()*seatCount) && match.getNormalSeats()>= seatCount ) {
 					match.removeNormalSeats(seatCount);
 					System.out.println("Booked");
 					return new Ticket(match.getId(), seatCount, seatCount*match.getNormalCost(),2);
 				}
 				else {
-					System.out.println("Conditions not matched. Check balance.");
+					Menu.menus.ticketBuyErr();
 				}
 				break;
 			}
@@ -221,23 +239,31 @@ public class Group1Stedium {
 		Client client = Database.getClinet(username);
 		
 		MenuLabel : while(true) {
+			
+			Tools.clear();
+			
 			Menu.menus.clientInterface(client.newMails());
-			int choice = Integer.parseInt(Tools.getInput(null));
+			int choice = Tools.getInputI(null);
 			
 			switch(choice) {
 				case 0 :{
+					//exit
 					break MenuLabel;
 				}
 				
 				case 1 :{
+					//my tickets
 					
 					innerMenu: while(true) {
+						
+						Tools.clear();
+						
 						client.showAllTickets();
 						
 						System.out.print("\n1. Cancel ticket\n"
 								+ "0. Back\n"
 								+ ">> ");
-						choice = Integer.parseInt(Tools.getInput(null));
+						choice = Tools.getInputI(null);
 						
 						switch(choice) {
 							case 1:{
@@ -272,25 +298,49 @@ public class Group1Stedium {
 				}
 				
 				case 2 :{
+					//buy tickets
 					
-					Database.showAllMatches();
-					
-					String id = Tools.getInput("Enter match id");
-					
-					if(Database.searchMatch(id) == null) {
-						System.out.println("Invalid id");
-					}
-					else {
-						Ticket ticket = this.bookTicket(client,Database.searchMatch(id));
-						client.addTicket(ticket);
-						client.addToPurchaseHistory(ticket);
+					inner: while(true) {
 						
+						Tools.clear();
+						
+						Database.showAllMatches();
+						
+						Menu.menus.buyNewTicketMenu();
+						
+						choice = Tools.getInputI(null);
+						
+						switch(choice) {
+							case 0: {
+								break inner;
+							}
+							
+							case 1: {
+								String id = Tools.getInput("Enter match id");
+								
+								if(Database.searchMatch(id) == null) {
+									System.out.println("Invalid id");
+								}
+								else {
+									Ticket ticket = this.bookTicket(client,Database.searchMatch(id));
+									client.addTicket(ticket);
+									client.addToPurchaseHistory(ticket);
+									
+								}
+								break;
+							}
+							
+							default:{
+								System.out.println("Invaid input\n");
+							}
+						}
 					}
 					
 					break;
 				}
 				
 				case 3 :{
+					//cancelled tickets
 					
 					Ticket cancelledTickets[] = client.getCancelledTickets();
 					
@@ -308,6 +358,7 @@ public class Group1Stedium {
 				}
 				
 				case 4 :{
+					//purchase tickets
 					
 					Ticket purchasedTickets[] = client.getPurchasedTickets();
 					
@@ -342,12 +393,16 @@ public class Group1Stedium {
 				}
 				
 				case 7 :{
+					// mailings
 					
 					menuLoop: while(true) {
 						
+						Tools.clear();
+						
+						
 						Menu.menus.mailMenu();
 						
-						choice = Integer.parseInt(Tools.getInput(null));
+						choice = Tools.getInputI(null);
 						
 						switch(choice) {
 							case 0 :{
@@ -355,7 +410,9 @@ public class Group1Stedium {
 							}
 							
 							case 1 : {
+								// inbox
 								
+								client.setNewMails(false);
 								System.out.println("\t\t==== Inbox ====\n\n");
 								
 								if(client.countAllMails() == 0) {
@@ -376,6 +433,8 @@ public class Group1Stedium {
 							}
 							
 							case 2 :{
+								//email to admin
+								
 								String message;
 								message = Tools.getInput("Enter your message");
 								
@@ -390,6 +449,8 @@ public class Group1Stedium {
 							}
 							
 							case 3 :{
+								//email to client
+								
 								String message;
 								String recEmail;
 								recEmail = Tools.getInput("Enter receiver email");
@@ -433,9 +494,12 @@ public class Group1Stedium {
 		Admin admin = Database.getAdmin(username);
 		
 		while(true) {
+			
+			Tools.clear();
+			
 			Menu.menus.adminInterface(admin.newMails());
 			
-			int choice = Integer.parseInt(Tools.getInput(null));
+			int choice = Tools.getInputI(null);
 			
 			switch(choice) {
 				case 0 : {
@@ -455,6 +519,9 @@ public class Group1Stedium {
 				case 2 : {
 					// manage clients
 					while(true) {
+						
+						Tools.clear();
+						
 						Database.showAllClients();
 						
 						String TempUsername = Tools.getInput("Enter client username (type exit to exit)");
@@ -478,12 +545,15 @@ public class Group1Stedium {
 					
 					innerMenu : while(true) {
 						
+						Tools.clear();
+						
+						
 						System.out.print("\t\t==== Mailing ====\n\n"
 								+ "1. Inbox\n"
 								+ "2. Mail to client\n"
 								+ "0. Back\n"
 								+ ">> ");
-						choice = Integer.parseInt(Tools.getInput(null));
+						choice = Tools.getInputI(null);
 						
 						switch(choice) {
 							case 0 : {
@@ -493,6 +563,8 @@ public class Group1Stedium {
 							
 							case 1 : {
 								//inbox
+								
+								Admin.setNewMails(false);
 								
 								if(admin.countAllMails() == 0) {
 									Menu.menus.emptyMenu();

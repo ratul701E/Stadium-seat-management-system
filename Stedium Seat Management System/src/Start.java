@@ -1,6 +1,7 @@
 import Database.Database;
 import StediumStuffs.Account;
 import StediumStuffs.Group1Stedium;
+import StediumStuffs.Match;
 import Users.Admin;
 import Users.Client;
 
@@ -34,6 +35,8 @@ public class Start {
 		Database.addClient(c2);
 		Database.addClient(c1);
 		Database.addAdmin(a1);
+		Database.addMatch(new Match("1111", "27 june, 2021", "No des", "Football", 1, 10, 100, 0));
+		Database.addMatch(new Match("1112", "29 june, 2021", "No des", "Football", 10, 100, 1000, 50));
 		/*
 		//Ticket t1 = new Ticket("2136", 5, 550,1);
 		//c2.addTicket(t1);

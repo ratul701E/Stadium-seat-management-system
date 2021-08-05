@@ -172,13 +172,15 @@ public class Match {
 	// shows
 	
 	public void shortDetails() {
-		if(isValid) System.out.printf("%-10s   ","valid");
-		else System.out.printf("%-10s   ","invalid");
-		System.out.printf("%-10s   %-15s   Seats vip (%d) normal (%d)\n", matchType,matchDay,vipSeats,normalSeats);
+		System.out.printf("ID %s    ", id);
+		if(isValid) System.out.printf("%4s   ","valid");
+		else System.out.printf("%4s   ","invalid");
+		System.out.printf("%4s   %4s   Seats vip (%d) normal (%d)\n", matchType,matchDay,vipSeats,normalSeats);
 		System.out.println("---------------------------------------------------------------------------\n");
 	}
 	
 	public void fullDetails() {
+		System.out.println("ID : " + id);
 		System.out.println("Match type : " + matchType);
 		System.out.println("Date : " + matchDay);
 		System.out.println("Vip seat available : " + vipSeats);

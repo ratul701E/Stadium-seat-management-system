@@ -188,12 +188,12 @@ public class Database {
 		String matchType = Tools.getInput("Enter match type");
 		String matchDay = Tools.getInput("Enter match date");
 		
-		int vipseats = Integer.parseInt(Tools.getInput("Enter vip seat quantity"));
-		int vipseatCost = Integer.parseInt(Tools.getInput("Vip seat price"));
+		int vipseats = Tools.getInputI("Enter vip seat quantity");
+		int vipseatCost = Tools.getInputI("Vip seat price");
 		
 		
-		int normalseats = Integer.parseInt(Tools.getInput("Enter normal seat quantity"));
-		int normalseatCost = Integer.parseInt(Tools.getInput("Normal seat price"));
+		int normalseats = Tools.getInputI("Enter normal seat quantity");
+		int normalseatCost = Tools.getInputI("Normal seat price");
 		
 		//String id, String matchDay, String description, String matchType, int vipSeats, int normalSeats, int vipCost, int normalCost
 		

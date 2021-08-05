@@ -74,6 +74,10 @@ public class Client extends Person implements IClientInterface{
 		this.isDisable = isDisable;
 	}
 	
+	public void setNewMails(boolean newMails) {
+		this.newMails = newMails;
+	}
+	
 	// ------------------------- gets
 	
 	
@@ -102,7 +106,6 @@ public class Client extends Person implements IClientInterface{
 	}
 	
 	public Mail[] getAllMails() {
-		newMails = false;
 		return mails;
 	}
 	

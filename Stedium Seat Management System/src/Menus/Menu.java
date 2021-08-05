@@ -57,7 +57,7 @@ public class Menu{
 	}
 	
 	public void vipSeatManage(int seats) {
-		System.out.println("\t\t==== Vip Seat Management (seat : " + seats + " ) ====\n\n"
+		System.out.print("\t\t==== Vip Seat Management (seat : " + seats + " ) ====\n\n"
 				+ "1. Add seat(s)\n"
 				+ "2. Change total seat\n"
 				+ "3. Remove seat\n"
@@ -68,7 +68,7 @@ public class Menu{
 	
 	
 	public void normalSeatManage(int seats) {
-		System.out.println("\t\t==== Normal Seat Management (seat : " + seats + " ) ====\n\n"
+		System.out.print("\t\t==== Normal Seat Management (seat : " + seats + " ) ====\n\n"
 				+ "1. Add seat(s)\n"
 				+ "2. Change total seat\n"
 				+ "3. Remove seat\n"
@@ -99,7 +99,7 @@ public class Menu{
 	
 	
 	public void accountManageMenu(double balance) {
-		System.out.println("\t\t==== Manage Account (Available alance :" + balance + ")====\n\n"
+		System.out.print("\t\t==== Manage Account (Available alance :" + balance + ")====\n\n"
 				+ "1. Change Balance (sensitive)\n"
 				+ "2. Deposit Money\n"
 				+ "0. Exit\n"
@@ -108,7 +108,7 @@ public class Menu{
 	
 	
 	public void ticketManageMenu() {
-		System.out.println("\t\t==== Ticket Manager ====\n\n"
+		System.out.print("\t\t==== Ticket Manager ====\n\n"
 				+ "1. Change ID (be careful)\n"
 				+ "2. Change seat quantites\n"
 				+ "3. Change Price\n"
@@ -118,7 +118,7 @@ public class Menu{
 	
 	
 	public void loginMenu() {
-		System.out.print("\t\t==== Log in Menu ====\n\n"
+		System.out.print("\t\t\t\t==== Log in Menu ====\n\n"
 				+ "1. Client login\n"
 				+ "2. Admin login\n"
 				+ "0. Back\n"
@@ -128,7 +128,7 @@ public class Menu{
 	
 	public void portalMenu() {
 		Tools.clear();
-		System.out.print("\t\t==== Stedium Portal ====\n\n"
+		System.out.print("\t\t\t\t==== Stedium Portal ====\n\n"
 				+ "1. Log in menu\n"
 				+ "2. Sign in menu\n"
 				+ "3. About us\n"
@@ -140,6 +140,12 @@ public class Menu{
 				+ "1. Inbox\n"
 				+ "2. Mail to Admin\n"
 				+ "3. Mail to another Client\n"
+				+ "0. Back\n"
+				+ ">> ");
+	}
+	
+	public void buyNewTicketMenu() {
+		System.out.print("1. Buy\n"
 				+ "0. Back\n"
 				+ ">> ");
 	}
@@ -159,6 +165,10 @@ public class Menu{
 		}
 		*/
 		System.out.println("  E  M  P  T  Y\n");
+	}
+	
+	public void ticketBuyErr() {
+		System.out.println("Conditions not matched. Either no seat is free or insufficiant balance.");
 	}
 	
 }
