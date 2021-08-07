@@ -1,4 +1,8 @@
 package StediumStuffs;
+
+import Management.Tools;
+import Menus.Menu;
+
 // ratul
 public class Ticket {
 	private String ID;
@@ -60,8 +64,8 @@ public class Ticket {
 	// shows
 	
 	public void showTicket() {
-		System.out.println("ID : " + ID + "\n"
-				+ "Type : " + type);
+		System.out.print(Menu.space);
+		System.out.printf("ID : %s %4d seat(s) %4s\n\n",ID, quantities, type);
 	}
 	
 }

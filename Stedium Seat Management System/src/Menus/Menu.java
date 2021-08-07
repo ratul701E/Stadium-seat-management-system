@@ -157,6 +157,13 @@ public class Menu{
 				+ "\n" + space + "          >> ");
 	}
 	
+	
+	// popup
+	
+	public void popup(String message) {
+		
+	}
+	
 	// design
 	
 	public void emptyMenu() {

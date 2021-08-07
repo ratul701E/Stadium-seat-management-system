@@ -262,7 +262,7 @@ public class Stadium {
 						
 						client.showAllTickets();
 						
-						System.out.print(Menu.space + "\n1. Cancel ticket\n"
+						System.out.print("\n" + Menu.space + "1. Cancel ticket\n"
 								+ Menu.space +  "0. Back\n"
 								+ Menu.space + "   >> ");
 						choice = Tools.getInputI(null);

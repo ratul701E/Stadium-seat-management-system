@@ -122,8 +122,7 @@ public class Client extends Person implements IClientInterface{
 		}
 		for(int i = 0; i < tickets.length; i++) {
 			if(tickets[i] != null) {
-				System.out.print((i+1) + ". ");
-				System.out.printf("ID : %-10s\t%-10d\n", tickets[i].getId(), tickets[i].getQuantities());
+				tickets[i].showTicket();
 			}
 		}
 	}
