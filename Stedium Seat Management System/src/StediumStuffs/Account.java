@@ -1,5 +1,7 @@
 package StediumStuffs;
 
+import Menus.Menu;
+
 public class Account {
 	private double balance;
 	
@@ -37,7 +39,7 @@ public class Account {
 	
 	public void deposid(double balance) {
 		if(balance < 500) {
-			System.out.println("You cannot add less than 500. Please try with more money");
+			System.out.println(Menu.space + "You cannot add less than 500. Please try with more money");
 			
 		}
 		

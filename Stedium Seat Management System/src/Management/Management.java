@@ -1,6 +1,6 @@
 package Management;
-import Database.Database;
 import Menus.Menu;
+import Database.*;
 import StediumStuffs.Account;
 import StediumStuffs.Match;
 import StediumStuffs.Ticket;
@@ -193,7 +193,7 @@ public class Management {
 			
 			Tools.clear();
 			
-			System.out.println("\t\t ==== Manage Client ====\n\n");
+			System.out.println(Menu.space + "==== Manage Client ====\n\n");
 			
 			client.shortProfile();
 			
@@ -211,37 +211,37 @@ public class Management {
 				}
 				
 				case 1:{
-					System.out.println("Current Name : " + client.getName());
+					System.out.println(Menu.space + "Current Name : " + client.getName());
 					client.setName(Tools.getInput("Enter new name"));
 					break;
 				}
 				
 				case 2:{
-					System.out.println("Current Age : " + client.getAge());
+					System.out.println(Menu.space + "Current Age : " + client.getAge());
 					client.setAge(Tools.getInputI("Enter new age"));
 					break;
 				}
 				
 				case 3:{
-					System.out.println("Current Gender : " + client.getGender());
+					System.out.println(Menu.space + "Current Gender : " + client.getGender());
 					client.setGender(Tools.getInput("Enter new gender"));
 					break;
 				}
 				
 				case 4:{
-					System.out.println("Current Number : " + client.getNumber());
+					System.out.println(Menu.space + "Current Number : " + client.getNumber());
 					client.setNumber(Tools.getInput("Enter new number"));
 					break;
 				}
 				
 				case 5:{
-					System.out.println("Current Address : " + client.getAddress());
+					System.out.println(Menu.space + "Current Address : " + client.getAddress());
 					client.setAddress(Tools.getInput("Enter new Address"));
 					break;
 				}
 				
 				case 6:{
-					System.out.println("Current Email : " + client.getEmail());
+					System.out.println(Menu.space + "Current Email : " + client.getEmail());
 					client.setEmail(Tools.getInput("Enter new email"));
 					break;
 				}
@@ -263,14 +263,15 @@ public class Management {
 							}
 							
 							case 1 :{
-								System.out.println("Current Balance : " + client.getAccount().getBalance());
+								Tools.clear();
+								System.out.println(Menu.space + "Current Balance : " + client.getAccount().getBalance());
 								client.getAccount().setBalance(Tools.getInputD("Enter new balance"));
 								
 								break;
 							}
 							
 							case 2 :{
-								
+								Tools.clear();
 								client.getAccount().deposid(Tools.getInputD("Enter Deposit money"));
 								
 								break;
@@ -300,7 +301,7 @@ public class Management {
 								ticket = client.getTicket(choice-1);
 								if(ticket == null) throw new Exception();
 							}catch (Exception e) {
-								System.out.println("Invalid choise.. Press enter to continue");
+								System.out.println(Menu.space + "Invalid choise.. Press enter to continue");
 								Database.scanner.nextLine();
 								continue;
 							}
@@ -311,7 +312,7 @@ public class Management {
 					break;
 				}
 				default :{
-					System.out.println("Invalid choice");
+					Tools.clearPrintHold("Invalid choice");
 				}
 
 			}
@@ -335,7 +336,7 @@ public class Management {
 				}
 				
 				case 1:{
-					System.out.println("Current balance is : " + account.getBalance());
+					System.out.println(Menu.space + "Current balance is : " + account.getBalance());
 					account.setBalance(Tools.getInputD("Enter new balance"));
 					break;
 				}
@@ -346,7 +347,7 @@ public class Management {
 				}
 				
 				default:{
-					System.out.println("Invalid choice");
+					System.out.println(Menu.space + "Invalid choice");
 				}
 			}
 		}

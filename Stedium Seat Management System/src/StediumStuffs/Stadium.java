@@ -7,7 +7,7 @@ import Management.Tools;
 import Menus.Menu;
 import Users.*;
 
-public class Group1Stedium {
+public class Stadium {
 	
 	
 	public void startServer() {
@@ -55,6 +55,8 @@ public class Group1Stedium {
 			
 			int choice = Tools.getInputI(null);
 			
+			Tools.clear();
+			
 			switch (choice) {
 				case 1: {
 					String username, password;
@@ -62,7 +64,7 @@ public class Group1Stedium {
 					password = Tools.getInput("Password");
 					
 					if(Database.isExistClinet(username, password) == 2) {
-						System.out.println("logged in");
+						Tools.clearPrintHold("Logged in");
 						
 						//
 						this.accessUser(username);
@@ -71,9 +73,9 @@ public class Group1Stedium {
 						 break;
 						
 					}else if(Database.isExistClinet(username, password) == 1) {
-						System.out.println("Invalid password");
+						Tools.clearPrintHold("Invalid password");
 					}else {
-						System.out.println("No user found");
+						Tools.clearPrintHold("No user found");
 					}
 					
 					break;
@@ -83,14 +85,14 @@ public class Group1Stedium {
 					String username = Tools.getInput("Username");
 					String password = Tools.getInput("Password");
 					if(Database.isAdmin(username,password)) {
-						System.out.println("logged in");
+						Tools.clearPrintHold("logged in");
 						
 						this.accessAdmin(username);
 						
 					}
 					
 					else {
-						System.out.println("This account dosen't exist or not a admin account");
+						Tools.clearPrintHold("This account dosen't exist or not a admin account");
 					}
 					
 					break;
@@ -103,7 +105,7 @@ public class Group1Stedium {
 				}
 				
 				default : {
-					System.out.println("Invaild.. try again");
+					Tools.clearPrintHold("Invaild.. try again");
 				}
 			}
 		}
@@ -121,22 +123,22 @@ public class Group1Stedium {
 		
 		
 		int age;
-		System.out.println("\t\t==== Signup Page ====\n");
+		System.out.println(Menu.space + "==== Signup Page ====\n");
 		
 		while(true) {
 			
 			Tools.clear();
 			
-			System.out.print("1. As client\n"
-					+ "2. As admin\n"
-					+ ">> ");
+			System.out.print(Menu.space + "1. As client\n"
+					+ Menu.space + "2. As admin\n"
+					+ Menu.space + ">> ");
 			int choice = Tools.getInputI(null);
 			if(choice == 2) {
 				isAdmin = true;
 				break;
 			}
 			else if(choice != 1) {
-				System.out.println("Invalid choice");
+				System.out.println(Menu.space + "Invalid choice");
 			}
 			else break;
 		}
@@ -156,7 +158,7 @@ public class Group1Stedium {
 			if(!Database.isUsernameExist(username)) {
 				break;
 			}
-			System.out.println("username is taken.. try diffrent name please");
+			System.out.println(Menu.space + "username is taken.. try diffrent name please");
 
 		}
 		
@@ -166,7 +168,7 @@ public class Group1Stedium {
 			Database.addAdmin(new Admin(name,age,gender,number,address,email,username, password));
 		}
 		else Database.addClient(new Client(name,age,gender,number,address,email,username, password, new Account(5000)));
-		System.out.println("Account created successfully");
+		System.out.println(Menu.space + "Account created successfully");
 		
 		// enter to continue
 		
@@ -176,14 +178,14 @@ public class Group1Stedium {
 	
 	private Ticket bookTicket(Client client, Match match) {
 
-		
-		System.out.println("\t\t==== Welcome to Ticket Counter====\n\n");
+		Tools.clear();
+		System.out.println(Menu.space + "==== Welcome to Ticket Counter ====\n\n");
 		match.fullDetails();
 		
-		System.out.println("1. Vip\n"
-				+ "2. Normal\n"
-				+ "0. Cancel\n"
-				+ ">> ");
+		System.out.print(Menu.space + "1. Vip\n"
+				+ Menu.space + "2. Normal\n"
+				+ Menu.space + "0. Cancel\n"
+				+ "\n"+ Menu.space + "   >> ");
 		
 		int choice = Tools.getInputI(null);
 		
@@ -198,7 +200,7 @@ public class Group1Stedium {
 				
 				if(Management.canBuy(client, match.getVipCost()*seatCount) && match.getVipSeats()>= seatCount) {
 					match.removeVipSeats(seatCount);
-					System.out.println("Booked");
+					Tools.clearPrintHold("Booked");
 					return new Ticket(match.getId(), seatCount, seatCount*match.getVipCost(),1);
 					
 				}
@@ -214,7 +216,7 @@ public class Group1Stedium {
 				
 				if(Management.canBuy(client, match.getNormalCost()*seatCount) && match.getNormalSeats()>= seatCount ) {
 					match.removeNormalSeats(seatCount);
-					System.out.println("Booked");
+					Tools.clearPrintHold("Booked");
 					return new Ticket(match.getId(), seatCount, seatCount*match.getNormalCost(),2);
 				}
 				else {
@@ -224,7 +226,7 @@ public class Group1Stedium {
 			}
 			
 			default:{
-				System.out.println("Error");
+				Tools.clearPrintHold("Error");
 			}
 			
 		}
@@ -260,25 +262,25 @@ public class Group1Stedium {
 						
 						client.showAllTickets();
 						
-						System.out.print("\n1. Cancel ticket\n"
-								+ "0. Back\n"
-								+ ">> ");
+						System.out.print(Menu.space + "\n1. Cancel ticket\n"
+								+ Menu.space +  "0. Back\n"
+								+ Menu.space + "   >> ");
 						choice = Tools.getInputI(null);
 						
 						switch(choice) {
 							case 1:{
-								System.out.println("Enter ID : ");
+								System.out.println(Menu.space + "Enter ID : ");
 								Ticket ticket = client.searchTicket(Tools.getInput(null));
 								if(ticket != null) {
 									if(client.removeTicket(ticket)) {
-										System.out.println("Cancelled");
+										System.out.println(Menu.space + "Cancelled");
 										client.addToCancelledTicket(ticket);
 									} else {
-										System.out.println("Can't cancel");
+										System.out.println(Menu.space + "Can't cancel");
 									}
 								}
 								else {
-									System.out.println("Invalid ID");
+									System.out.println(Menu.space + "Invalid ID");
 								}
 								
 								
@@ -289,7 +291,7 @@ public class Group1Stedium {
 							}
 							
 							default: {
-								System.out.println("Invalid choice");
+								System.out.println(Menu.space + "Invalid choice");
 							}
 						}
 					}
@@ -316,10 +318,10 @@ public class Group1Stedium {
 							}
 							
 							case 1: {
-								String id = Tools.getInput("Enter match id");
+								String id = Tools.getInput("      Enter match id");
 								
 								if(Database.searchMatch(id) == null) {
-									System.out.println("Invalid id");
+									System.out.println(Menu.space + "      Invalid id");
 								}
 								else {
 									Ticket ticket = this.bookTicket(client,Database.searchMatch(id));
@@ -331,7 +333,7 @@ public class Group1Stedium {
 							}
 							
 							default:{
-								System.out.println("Invaid input\n");
+								System.out.println(Menu.space + "      Invaid input\n");
 							}
 						}
 					}
@@ -340,6 +342,7 @@ public class Group1Stedium {
 				}
 				
 				case 3 :{
+					Tools.clear();
 					//cancelled tickets
 					
 					Ticket cancelledTickets[] = client.getCancelledTickets();
@@ -358,6 +361,7 @@ public class Group1Stedium {
 				}
 				
 				case 4 :{
+					Tools.clear();
 					//purchase tickets
 					
 					Ticket purchasedTickets[] = client.getPurchasedTickets();
@@ -377,6 +381,7 @@ public class Group1Stedium {
 				}
 				
 				case 5 :{
+					Tools.clear();
 					
 					//notifications
 					
@@ -384,9 +389,10 @@ public class Group1Stedium {
 				}
 				
 				case 6 :{
+					Tools.clear();
 					
 					//Account
-					System.out.println("Account balance : " + client.getAccount().getBalance());
+					System.out.println(Menu.space + "Account balance : " + client.getAccount().getBalance());
 					Tools.etoc();
 					
 					break;
@@ -400,7 +406,7 @@ public class Group1Stedium {
 						Tools.clear();
 						
 						
-						Menu.menus.mailMenu();
+						Menu.menus.mailMenu(client.newMails());
 						
 						choice = Tools.getInputI(null);
 						
@@ -412,12 +418,13 @@ public class Group1Stedium {
 							case 1 : {
 								// inbox
 								
+								Tools.clear();
+								
 								client.setNewMails(false);
-								System.out.println("\t\t==== Inbox ====\n\n");
+								System.out.println(Menu.space + "==== Inbox ====\n\n");
 								
 								if(client.countAllMails() == 0) {
 									Menu.menus.emptyMenu();
-									Tools.etoc();
 									break;
 								}
 								
@@ -434,14 +441,14 @@ public class Group1Stedium {
 							
 							case 2 :{
 								//email to admin
+								Tools.clear();
 								
 								String message;
 								message = Tools.getInput("Enter your message");
 								
 								Admin.addMail(new Mail(client.getEmail(), message));
 								
-								System.out.println("Email sent successfully");
-								Tools.etoc();
+								Tools.clearPrintHold("Email sent successfully");
 								
 								break;
 								
@@ -450,6 +457,7 @@ public class Group1Stedium {
 							
 							case 3 :{
 								//email to client
+								Tools.clear();
 								
 								String message;
 								String recEmail;
@@ -458,20 +466,18 @@ public class Group1Stedium {
 								
 								Client receiver = Database.searchByEmail(recEmail);
 								if(receiver == null) {
-									System.out.println("Invalid receiver email.");
-									Tools.etoc();
+									Tools.clearPrintHold("Invalid receiver email.");
 								}
 								else {
 									receiver.addMail(new Mail(client.getEmail(), message));
-									System.out.println("Email sent successfully");
-									Tools.etoc();
+									Tools.clearPrintHold("Email sent successfully");
 								}
 								
 								break;
 							}
 							
 							default :{
-								System.out.println("Invalid choice");
+								System.out.println(Menu.space + "Invalid choice");
 							}
 						}
 					}
@@ -533,7 +539,7 @@ public class Group1Stedium {
 							Management.manageClient(client);
 						}
 						else {
-							System.out.println("Invalid username");
+							System.out.println(Menu.space + "Invalid username");
 						}
 					}
 					
@@ -548,11 +554,15 @@ public class Group1Stedium {
 						Tools.clear();
 						
 						
-						System.out.print("\t\t==== Mailing ====\n\n"
-								+ "1. Inbox\n"
-								+ "2. Mail to client\n"
-								+ "0. Back\n"
-								+ ">> ");
+						System.out.print(Menu.space + "==== Mailing ====\n\n"
+								+ Menu.space + "1. Inbox");
+						
+						if(admin.newMails()) System.out.println("   (new!)");
+						else System.out.println();
+						
+						System.out.print(Menu.space + "2. Mail to client\n"
+								+ Menu.space + "0. Back\n"
+								+ Menu.space + "   >> ");
 						choice = Tools.getInputI(null);
 						
 						switch(choice) {
@@ -563,6 +573,7 @@ public class Group1Stedium {
 							
 							case 1 : {
 								//inbox
+								Tools.clear();
 								
 								Admin.setNewMails(false);
 								
@@ -584,6 +595,7 @@ public class Group1Stedium {
 							
 							case 2 : {
 								//mail to client
+								Tools.clear();
 								
 								String message;
 								String recEmail;
@@ -592,12 +604,12 @@ public class Group1Stedium {
 								
 								Client receiver = Database.searchByEmail(recEmail);
 								if(receiver == null) {
-									System.out.println("Invalid receiver email.");
+									System.out.println(Menu.space + "Invalid receiver email.");
 									Tools.etoc();
 								}
 								else {
 									receiver.addMail(new Mail(admin.getEmail(), message,true));
-									System.out.println("Email sent successfully");
+									System.out.println(Menu.space + "Email sent successfully");
 									Tools.etoc();
 								}
 								

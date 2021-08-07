@@ -326,11 +326,12 @@ public class Client extends Person implements IClientInterface{
 	// shows
 	
 	public void shortProfile() {
-		System.out.println("Name : " + getName());
-		System.out.println("Age : " + getAge());
-		System.out.println("Gender : " + getGender());
-		System.out.println("Address : " + getAddress());
-		System.out.println("Email : " + email);
-		System.out.println("\n\n");
+		System.out.println(Menu.space + "Username : " + username);
+		System.out.println(Menu.space + "Name : " + getName());
+		System.out.println(Menu.space + "Age : " + getAge());
+		System.out.println(Menu.space + "Gender : " + getGender());
+		System.out.println(Menu.space + "Address : " + getAddress());
+		System.out.println(Menu.space + "Email : " + email);
+		System.out.println("\n");
 	}
 }

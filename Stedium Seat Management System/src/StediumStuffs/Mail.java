@@ -1,5 +1,6 @@
 package StediumStuffs;
 
+import Menus.Menu;
 
 public class Mail{
 	
@@ -48,9 +49,9 @@ public class Mail{
 	
 	
 	public void showDetails(){
-		
-		System.err.println("-----------------------------------------------");
-		System.out.print("Sender : "+sender);
+		String space = "                                         ";
+		System.err.println(space + "-----------------------------------------------");
+		System.out.print(space + "Sender : "+sender);
 		
 		if(isAdmin) {
 			System.out.println("   (Admin)");
@@ -58,8 +59,8 @@ public class Mail{
 			System.out.println("   (Client)");
 		}
 		
-		System.out.println("Message : "+message);
-		System.err.println("-----------------------------------------------");
+		System.out.println(space + "Message : "+message);
+		System.err.println(space + "-----------------------------------------------");
 		System.err.println("\n");
 	}
 }

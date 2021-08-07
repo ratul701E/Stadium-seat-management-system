@@ -1,7 +1,7 @@
 package Database;
 import java.util.Scanner;
 import Management.*;
-
+import Menus.Menu;
 import StediumStuffs.Match;
 import Users.Admin;
 import Users.Client;
@@ -89,10 +89,10 @@ public class Database {
 	// shows
 	
 	public static void showAllMatches() {
-		System.out.println("\t\t\t==== All Matches ====\n");
+		System.out.println(Menu.space + "==== All Matches ====\n");
 		for(int i = 0; i< matches.length; i++) {
 			if(matches[i] != null ) {
-				 System.out.print((i+1) + ". ");
+				 //System.out.print((i+1) + ". ");
 				 matches[i].shortDetails();
 			}
 		}
@@ -176,13 +176,12 @@ public class Database {
 	// taking information
 	
 	public static void createMatch() {
-		System.out.println("\t\t==== New Match ====\n\n");
+		Tools.clear();
+		System.out.println(Menu.space + "==== New Match ====\n\n");
 		String id;
 		
-		do {
-			id = Tools.getInput("Enter match id (unique id req)");
-			//check id is available or not
-		}while(false);
+		System.out.println(Menu.space + "Match Id is : " + Match.getIdCounter());
+		id = Integer.toString(Match.getIdCounter());
 		
 		String description = Tools.getInput("Enter match description");
 		String matchType = Tools.getInput("Enter match type");
@@ -198,11 +197,16 @@ public class Database {
 		//String id, String matchDay, String description, String matchType, int vipSeats, int normalSeats, int vipCost, int normalCost
 		
 		boolean confirmation = Database.addMatch(new Match(id,matchDay,description,matchType,vipseats,normalseats,vipseatCost,normalseatCost));
+		
+		Tools.clear();
+		
 		if(confirmation) {
-			System.out.println("Match Added");
+			System.out.println(Menu.space + "Match Added");
 		}else {
-			System.out.println("Match cannot be added. Maybe storage is full");
+			System.out.println(Menu.space + "Match cannot be added. Maybe storage is full");
 		}
+		
+		Tools.etoc();
 	}
 	
 	

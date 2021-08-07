@@ -1,4 +1,5 @@
 package StediumStuffs;
+import Menus.Menu;
 import Users.Client;
 
 // ratul
@@ -15,14 +16,19 @@ public class Match {
 	private boolean isValid;
 	private Client clients[];
 	
+	// unique id
+	
+	private static int idCounter = 1000;
+	
 	
 	// constructors
 	
 	public Match() {
-		
+		idCounter++;
 	}
 	
 	public Match(String matchType, int vipSeats, int normalSeats) {
+		this();
 		this.isValid = true;
 		this.matchType = matchType;
 		this.vipSeats = vipSeats;
@@ -123,6 +129,10 @@ public class Match {
 		return normalCost;
 	}
 	
+	public static int getIdCounter() {
+		return idCounter;
+	}
+	
 	// add seats
 	
 	public void addVipSeats(int seats) {
@@ -172,21 +182,22 @@ public class Match {
 	// shows
 	
 	public void shortDetails() {
+		System.out.print("                               ");
 		System.out.printf("ID %s    ", id);
 		if(isValid) System.out.printf("%4s   ","valid");
 		else System.out.printf("%4s   ","invalid");
 		System.out.printf("%4s   %4s   Seats vip (%d) normal (%d)\n", matchType,matchDay,vipSeats,normalSeats);
-		System.out.println("---------------------------------------------------------------------------\n");
+		System.out.println("                               ____________________________________________________________________________\n");
 	}
 	
 	public void fullDetails() {
-		System.out.println("ID : " + id);
-		System.out.println("Match type : " + matchType);
-		System.out.println("Date : " + matchDay);
-		System.out.println("Vip seat available : " + vipSeats);
-		System.out.println("Normal seat available : " + normalSeats);
-		System.out.println("Costs : Vip : " + vipCost + " tk\tNormal : " + normalCost);
-		System.out.println("\nDescription:\n" + description);
+		System.out.println(Menu.space + "ID : " + id);
+		System.out.println(Menu.space + "Match type : " + matchType);
+		System.out.println(Menu.space + "Date : " + matchDay);
+		System.out.println(Menu.space + "Vip seat available : " + vipSeats);
+		System.out.println(Menu.space + "Normal seat available : " + normalSeats);
+		System.out.println(Menu.space + "Costs : Vip : " + vipCost + " tk\tNormal : " + normalCost);
+		System.out.println( "\n" + Menu.space + "Description:\n" + Menu.space + description +"\n");
 	}
 	
 	// privates

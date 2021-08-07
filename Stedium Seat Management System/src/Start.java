@@ -1,9 +1,6 @@
 import Database.Database;
-import StediumStuffs.Account;
-import StediumStuffs.Group1Stedium;
-import StediumStuffs.Match;
-import Users.Admin;
-import Users.Client;
+import StediumStuffs.*;
+import Users.*;
 
 public class Start {
 
@@ -50,7 +47,7 @@ public class Start {
 		 * 
 		 */
 		
-		Group1Stedium server = new Group1Stedium();
+		Stadium server = new Stadium();
 		/*
 		 * Database.createMatch(); Database.createMatch();
 		 */
