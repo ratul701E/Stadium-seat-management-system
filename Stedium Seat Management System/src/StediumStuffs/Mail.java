@@ -1,8 +1,10 @@
 package StediumStuffs;
 
-import Menus.Menu;
+import java.io.Serializable;
 
-public class Mail{
+
+
+public class Mail implements Serializable{
 	
 	private boolean isAdmin = false;
 	private String sender;

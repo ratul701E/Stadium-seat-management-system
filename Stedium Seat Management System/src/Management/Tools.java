@@ -1,7 +1,6 @@
 package Management;
 
 import java.io.IOException;
-
 import Database.Database;
 import Menus.Menu;
 
@@ -13,8 +12,8 @@ public class Tools {
 			
 			String returnValue = Database.scanner.nextLine();
 			if(returnValue.isEmpty()) {
-				System.err.print(Menu.space + "This field cannot be empty. Try again\n"
-						+ Menu.space +  "  : ");
+				System.out.print("This field cannot empty. Try Again");
+				System.out.print(Menu.space +  "  >> ");
 				continue;
 			}
 			return returnValue;
@@ -30,8 +29,8 @@ public class Tools {
 			try {
 				return Integer.parseInt(returnValue);
 			}catch(NumberFormatException err){
-				System.out.print(Menu.space + "Enter a valid input please\n"
-						+ Menu.space + ">> ");
+				System.out.print("This field dosen't suppot this kind of data");
+				System.out.print(Menu.space +  "  >> ");
 				continue;
 			}
 		}
@@ -45,8 +44,8 @@ public class Tools {
 			try {
 				return Double.parseDouble(returnValue);
 			}catch(NumberFormatException err){
-				System.out.print(Menu.space + "Enter a valid input please\n"
-						+  Menu.space + ">> ");
+				System.out.print("This field dosen't suppot this kind of data");
+				System.out.print(Menu.space +  "  >> ");
 				continue;
 			}
 		}
@@ -87,8 +86,23 @@ public class Tools {
 		Tools.clear();
 		System.out.println(Menu.space + message);
 		Tools.etoc();
+		Tools.clear();
 	}
 	
+	
+	public static void sleepFor(String message, int sec){
+		try{
+			Tools.clear();
+			System.out.print("\n\n\n\n" + Menu.space + message);
+			for(int i = 0; i < sec; i++){
+				System.out.print(".");
+				Thread.sleep(1000);
+			}
+			Tools.clear();
+		}catch(Exception e){
+			// pass
+		}
+	}
 	
 	
 	//menus

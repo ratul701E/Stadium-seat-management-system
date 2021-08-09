@@ -1,10 +1,12 @@
 package StediumStuffs;
 
+import java.io.Serializable;
+
 import Management.Tools;
 import Menus.Menu;
 
 // ratul
-public class Ticket {
+public class Ticket implements Serializable{
 	private String ID;
 	private int quantities;
 	private double price;

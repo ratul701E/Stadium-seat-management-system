@@ -6,10 +6,19 @@ import StediumStuffs.Match;
 import Users.Admin;
 import Users.Client;
 
-public class Database {
+public abstract class Database {
 	public static Client clients[];
 	public static Admin admins[];
 	public static Match matches[];
+	public static AdminFileHandler AdminfilerHandler;
+	public static ClientFileHandler ClientfilerHandler;
+	public static MatchFileHandler matchFileHandler;
+	
+	static {
+		AdminfilerHandler = new AdminFileHandler("Database/source/admins.ser");
+		ClientfilerHandler = new ClientFileHandler("Database/source/clients.ser");
+		matchFileHandler = new MatchFileHandler("Database/source/matches.ser");
+	}
 	
 	
 	public static Scanner scanner = new Scanner(System.in);
@@ -178,10 +187,9 @@ public class Database {
 	public static void createMatch() {
 		Tools.clear();
 		System.out.println(Menu.space + "==== New Match ====\n\n");
-		String id;
+		String id = Match.GeneratMatchId();
 		
-		System.out.println(Menu.space + "Match Id is : " + Match.getIdCounter());
-		id = Integer.toString(Match.getIdCounter());
+		System.out.println(Menu.space + "Match Id is : " + id);
 		
 		String description = Tools.getInput("Enter match description");
 		String matchType = Tools.getInput("Enter match type");
@@ -232,6 +240,24 @@ public class Database {
 			}
 		}
 		return null;
+	}
+	
+	// file reader writer
+	
+	public static void  saveData() {
+		AdminfilerHandler.write(admins);
+		ClientfilerHandler.write(clients);
+		matchFileHandler.write(matches);
+		
+		Tools.sleepFor("Saving ",4);
+	}
+	
+	public static void restoreData() {
+		admins =  AdminfilerHandler.read();
+		clients =  ClientfilerHandler.read();
+		matches = matchFileHandler.read();
+		
+		Tools.sleepFor("Fetching data ", 4);
 	}
 	
 	

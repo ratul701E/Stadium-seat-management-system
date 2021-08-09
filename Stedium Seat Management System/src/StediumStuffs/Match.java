@@ -1,10 +1,13 @@
 package StediumStuffs;
+import java.io.Serializable;
+
+import Database.Database;
 import Menus.Menu;
 import Users.Client;
 
 // ratul
 
-public class Match {
+public class Match implements Serializable {
 	private String description;
 	private String id;
 	private String matchType;
@@ -23,9 +26,7 @@ public class Match {
 	
 	// constructors
 	
-	public Match() {
-		idCounter++;
-	}
+	public Match() {}
 	
 	public Match(String matchType, int vipSeats, int normalSeats) {
 		this();
@@ -33,7 +34,6 @@ public class Match {
 		this.matchType = matchType;
 		this.vipSeats = vipSeats;
 		this.normalSeats = normalSeats;
-		this.matchId();
 		this.clients = new Client[200];
 	}
 	
@@ -202,12 +202,13 @@ public class Match {
 	
 	// privates
 	
-	private void matchId() {
-		this.id = "";
-		for(int i = 0; i < 7 ; i++) {
-			int c = (int)  Math.random() * ('Z' - 'A' + 1) + 'A';
-			id += (char)c;
-		}
+	public static String GeneratMatchId() {
+		do {
+			if(Database.searchMatch(Integer.toString(idCounter)) == null) {
+				return Integer.toString(idCounter);
+			}
+			else idCounter++;
+		}while(true);
 	}
 	
 }

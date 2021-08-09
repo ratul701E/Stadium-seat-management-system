@@ -1,5 +1,8 @@
 package Menus;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import Management.Tools;
 
 public class Menu{
@@ -32,15 +35,16 @@ public class Menu{
 	
 	public void adminInterface(boolean newMails) {
 		System.out.print(space + "==== Admin Panel ====\n\n"
-				+ space + "1. Add match\n"
-				+ space + "2. Manage Clients\n"
-				+ space + "3. Mailings");
+				+ space + "1. Add Match\n"
+				+ space + "2. Manage Match\n"
+				+ space + "3. Manage Clients\n"
+				+ space + "4. Mailings");
 		if(newMails) {
 			System.out.println("  (new!)");
 		}else {
 			System.out.println();
 		}
-				System.out.print(space + "4. Notifications\n"
+				System.out.print(space + "5. Notifications\n"
 				+ space + "0. Logout\n"
 				+ "\n" + space + " >> ");
 	}
@@ -83,7 +87,7 @@ public class Menu{
 	
 	public  void selectMenu() {
 		//System.out.println("\n\t\tSelect one to modify");
-		System.out.print("\n" + space + "_exit on 0_ >> ");
+		System.out.print("\n" + space + "  >> ");
 	}
 	
 	
@@ -132,9 +136,11 @@ public class Menu{
 	public void portalMenu() {
 		//Tools.clear();
 		System.out.print(space + "==== Stadium Portal ====\n\n"
-				+ space + "1. Log in menu\n"
-				+ space + "2. Sign in menu\n"
-				+ space + "3. About us\n"
+				+ space + "1. Sign in\n"
+				+ space + "2. Create an account\n"
+				+ space + "3. Contributions\n"
+				+ space + "4. About us\n"
+				+ space + "0. Stop server\n"
 				+ "\n" + space + "  >> ");
 	}
 	
@@ -161,7 +167,7 @@ public class Menu{
 	// popup
 	
 	public void popup(String message) {
-		
+		Tools.clearPrintHold(message);
 	}
 	
 	// design

@@ -1,4 +1,6 @@
 package Users;
+import java.io.Serializable;
+
 import Interfaces.IClientInterface;
 import Menus.Menu;
 import StediumStuffs.Account;
@@ -13,19 +15,19 @@ import StediumStuffs.Ticket;
  * 
  */
 
-public class Client extends Person implements IClientInterface{
+public class Client extends Person implements IClientInterface, Serializable{
 	private String username;
 	private String password;
 	private String email;
 	private boolean isDisable;
 	private boolean newMails;
-	private Account account;
-	private Mail mails[];
-	private Notification notifications[];
-	private Ticket tickets[];
-	private Ticket cancelledTickets[];
-	private Match upcomingMatches[];
-	private Ticket purchaseHistory[];
+	private  Account account;
+	private  Mail mails[];
+	private  Notification notifications[];
+	private  Ticket tickets[];
+	private  Ticket cancelledTickets[];
+	private  Match upcomingMatches[];
+	private  Ticket purchaseHistory[];
 	
 	
 	// ------------------------- constructors

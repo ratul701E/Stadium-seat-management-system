@@ -26,14 +26,14 @@ public class Start {
 		Database.addMatch(match7);
 		
 		*/
-		Client c1 = new Client("Ratul", 20, "Male", "01920221554", "Nandipara", "Ratul@gmail.com","ratul","ratul", new Account(0));
-		Client c2 = new Client("Priya", 20, "Female", "017.......23", "Gazipur", "Priya@gmail.com","asiya","asiya", new Account(0));
-		Admin a1= new Admin("Rian", 20, "Male", "017.......23", "Gazipur", "Rian@gmail.com","rian","rian");
-		Database.addClient(c2);
-		Database.addClient(c1);
-		Database.addAdmin(a1);
-		Database.addMatch(new Match("1111", "27 june, 2021", "No des", "Football", 1, 10, 100, 0));
-		Database.addMatch(new Match("1112", "29 june, 2021", "No des", "Football", 10, 100, 1000, 50));
+		//Client c1 = new Client("Ratul", 20, "Male", "01920221554", "Nandipara", "Ratul@gmail.com","ratul","ratul", new Account(0));
+		//Client c2 = new Client("Priya", 20, "Female", "017.......23", "Gazipur", "Priya@gmail.com","asiya","asiya", new Account(0));
+		//Admin a1= new Admin("Rian", 20, "Male", "017.......23", "Gazipur", "Rian@gmail.com","rian","rian");
+		//Database.addClient(c2);
+		//Database.addClient(c1);
+		//Database.addAdmin(a1);
+		//Database.addMatch(new Match("1000", "27 june, 2021", "No des", "Football", 1, 10, 100, 0));
+		//Database.addMatch(new Match("1112", "29 june, 2021", "No des", "Football", 10, 100, 1000, 50));
 		/*
 		//Ticket t1 = new Ticket("2136", 5, 550,1);
 		//c2.addTicket(t1);
@@ -46,7 +46,7 @@ public class Start {
 		//Group1Stedium.login();
 		 * 
 		 */
-		
+		//Database.saveData();
 		Stadium server = new Stadium();
 		/*
 		 * Database.createMatch(); Database.createMatch();

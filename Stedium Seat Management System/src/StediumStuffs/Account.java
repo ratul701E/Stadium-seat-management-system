@@ -1,8 +1,10 @@
 package StediumStuffs;
 
+import java.io.Serializable;
+
 import Menus.Menu;
 
-public class Account {
+public class Account implements Serializable {
 	private double balance;
 	
 	public Account() {

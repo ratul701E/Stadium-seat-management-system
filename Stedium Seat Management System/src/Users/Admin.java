@@ -1,4 +1,6 @@
 package Users;
+import java.io.Serializable;
+
 import Database.Database;
 import Interfaces.IAdminInterface;
 import Management.Management;
@@ -15,7 +17,7 @@ import StediumStuffs.Notification;
  * 
  */
 
-public class Admin extends Person implements IAdminInterface{
+public class Admin extends Person implements IAdminInterface, Serializable{
 	private String email;
 	private String username;
 	private String password;

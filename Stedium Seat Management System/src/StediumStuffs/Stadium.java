@@ -11,9 +11,10 @@ public class Stadium {
 	
 	
 	public void startServer() {
+		Database.restoreData();
 		int choice;
-		while(true) {
-			
+		inner: while(true) {
+		
 			Tools.clear();
 			
 			
@@ -34,8 +35,22 @@ public class Stadium {
 				}
 				
 				case 3 : {
+					// Group1Stedium.Contribute();
+					break;
+				}
+				
+				case 4 : {
 					// Group1Stedium.aboutUs();
 					break;
+				}
+				
+				case 0 :{
+					Database.saveData();
+					return;
+				}
+				
+				default :{
+					Tools.clearPrintHold("Invalid message");
 				}
 			}
 		}
@@ -60,6 +75,7 @@ public class Stadium {
 			switch (choice) {
 				case 1: {
 					String username, password;
+					System.out.println(Menu.space + "==== Client login ====\n\n");
 					username = Tools.getInput("Username");
 					password = Tools.getInput("Password");
 					
@@ -82,6 +98,7 @@ public class Stadium {
 				}
 				
 				case 2: {
+					System.out.println(Menu.space + "==== Admin login ====\n\n");
 					String username = Tools.getInput("Username");
 					String password = Tools.getInput("Password");
 					if(Database.isAdmin(username,password)) {
@@ -92,7 +109,7 @@ public class Stadium {
 					}
 					
 					else {
-						Tools.clearPrintHold("This account dosen't exist or not a admin account");
+						Tools.clearPrintHold("This account dosen't exist or not an admin account");
 					}
 					
 					break;
@@ -523,6 +540,13 @@ public class Stadium {
 				}
 				
 				case 2 : {
+					// manage matches
+					
+					
+					break;
+				}
+				
+				case 3 : {
 					// manage clients
 					while(true) {
 						
@@ -546,7 +570,7 @@ public class Stadium {
 					break;
 				}
 				
-				case 3 : {
+				case 4 : {
 					// mailings
 					
 					innerMenu : while(true) {
@@ -622,7 +646,7 @@ public class Stadium {
 					break;
 				}
 				
-				case 4 : {
+				case 5 : {
 					// notifications
 					
 					
