@@ -4,7 +4,7 @@ import java.io.IOException;
 import Database.Database;
 import Menus.Menu;
 
-public class Tools {
+public abstract class Tools {
 	
 	public static String getInput(String message) {
 		while(true) {
@@ -12,7 +12,7 @@ public class Tools {
 			
 			String returnValue = Database.scanner.nextLine();
 			if(returnValue.isEmpty()) {
-				System.out.print("This field cannot empty. Try Again");
+				System.out.print(Menu.space + "This field cannot empty. Try Again");
 				System.out.print(Menu.space +  "  >> ");
 				continue;
 			}
@@ -29,8 +29,8 @@ public class Tools {
 			try {
 				return Integer.parseInt(returnValue);
 			}catch(NumberFormatException err){
-				System.out.print("This field dosen't suppot this kind of data");
-				System.out.print(Menu.space +  "  >> ");
+				System.out.print(Menu.space + "This field dosen't suppot this kind of data");
+				System.out.print("\n" + Menu.space +  "  >> ");
 				continue;
 			}
 		}
@@ -44,8 +44,8 @@ public class Tools {
 			try {
 				return Double.parseDouble(returnValue);
 			}catch(NumberFormatException err){
-				System.out.print("This field dosen't suppot this kind of data");
-				System.out.print(Menu.space +  "  >> ");
+				System.out.print(Menu.space + "This field dosen't suppot this kind of data");
+				System.out.print("\n" + Menu.space +  "  >> ");
 				continue;
 			}
 		}
@@ -62,6 +62,8 @@ public class Tools {
 	    System.out.print("\033[H\033[2J");   
 	    System.out.flush();  
 	    */
+		
+		
 		
 		 try {
 			new ProcessBuilder("cmd", "/c", "clear").inheritIO().start().waitFor();

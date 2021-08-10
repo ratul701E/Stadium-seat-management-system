@@ -186,26 +186,24 @@ public class Admin extends Person implements IAdminInterface, Serializable{
 	
 	public void manageMatches() {
 		while(true) {
+			Tools.clear();
 			int choice;
-			Database.showAllMatches();
-			System.out.println("0. Exit");
-			
-			Menu.menus.selectMenu();
-			
-			choice = Integer.parseInt(Tools.getInput(""));
-			if(choice == 0) return;
-			Match match;
-			
-			try {
-				match = Database.matches[choice-1];
-				if(Database.matches[choice-1] == null) throw new Exception();
-			}catch (Exception e) {
-				
-				Tools.etoc();
-				
-				continue;
+			if(Database.countMatch() == 0) {
+				Menu.menus.emptyMenu();
+				break;
 			}
+			Database.showAllMatches();
 			
+			String matchId = Tools.getInput("Enter match ID (back on 0) ");
+			
+			if(matchId.equals("0")) return;
+			
+			Match match = Database.searchMatch(matchId);
+			
+			if(match == null) {
+				Menu.menus.popup(Menu.space + "Match not found");
+				return;
+			}
 			Management.ManageMatch(match);
 			
 		}
@@ -239,5 +237,16 @@ public class Admin extends Person implements IAdminInterface, Serializable{
 		return count;
 	}
 
-	
+	/*
+	 * try {
+				match = Database.matches[choice-1];
+				if(Database.matches[choice-1] == null) throw new Exception();
+			}catch (Exception e) {
+				
+				Tools.etoc();
+				
+				continue;
+			}
+			
+	 */
 }

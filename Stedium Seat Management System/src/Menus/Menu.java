@@ -1,11 +1,9 @@
 package Menus;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 import Management.Tools;
 
-public class Menu{
+public class Menu {
+	
 	public static String space = "                                                     ";
 	
 	public static Menu menus = new Menu();
@@ -19,9 +17,9 @@ public class Menu{
 				+ space + "2. Buy tickets\n"
 				+ space + "3. Cancelled tickets\n"
 				+ space + "4. Purchase history\n"
-				+ space + "5. Notifications\n"
+				+ space + "5. Change username and password\n"
 				+ space + "6. Account information\n"
-				+ space + "7. Compose mail and inbox");
+				+ space + "7. Mail");
 		
 		if(newMails) {
 			System.out.println("  (new!)");
@@ -38,13 +36,13 @@ public class Menu{
 				+ space + "1. Add Match\n"
 				+ space + "2. Manage Match\n"
 				+ space + "3. Manage Clients\n"
-				+ space + "4. Mailings");
+				+ space + "4. Mail");
 		if(newMails) {
 			System.out.println("  (new!)");
 		}else {
 			System.out.println();
 		}
-				System.out.print(space + "5. Notifications\n"
+				System.out.print(space + "5. Change username and password\n"
 				+ space + "0. Logout\n"
 				+ "\n" + space + " >> ");
 	}
@@ -59,6 +57,7 @@ public class Menu{
 				+ space + "4. Change/modify vip seat number\n"
 				+ space + "5. Change/modify normal seat numbers\n"
 				+ space + "6. Change validity\n"
+				+ space + "7. Remove match\n"
 				+ space + "0. Exit \n"
 				+ "\n" + space + "  >> "); 
 	}
@@ -101,6 +100,7 @@ public class Menu{
 				+ space + "6. Change Email\n"
 				+ space + "7. Account details\n"
 				+ space + "8. Manage Tickets\n"
+				+ space + "9. Remove client\n"
 				+ space + "0. Exit\n");
 	}
 	

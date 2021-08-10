@@ -47,4 +47,8 @@ public class Account implements Serializable {
 		
 		else this.balance += balance;
 	}
+	
+	public void addBalance(double balance) {
+		this.balance += balance;
+	}
 }

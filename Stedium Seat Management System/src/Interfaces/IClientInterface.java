@@ -21,7 +21,7 @@ public interface IClientInterface {
 	
 	public boolean removeMail(Mail mail);
 	public boolean removeNotification(Notification notification);
-	public boolean removeTicket(Ticket ticket);
+	public boolean removeTicket(String id);
 	public boolean removeFormCancelledTicket(Ticket ticket);
 	public boolean removeFormUpcomingMatches(Match match);
 	public boolean removeFormPurchaseHistory(Ticket ticket);
@@ -34,5 +34,5 @@ public interface IClientInterface {
 	public int countAllMails();
 	
 	public void shortProfile();
-	public void showAllTickets();
+	public boolean showAllTickets();
 }

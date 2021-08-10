@@ -7,14 +7,15 @@ import Users.Admin;
 import Users.Client;
 
 public abstract class Database {
-	public static Client clients[];
-	public static Admin admins[];
-	public static Match matches[];
-	public static AdminFileHandler AdminfilerHandler;
-	public static ClientFileHandler ClientfilerHandler;
-	public static MatchFileHandler matchFileHandler;
+	private static Client clients[];
+	private static Admin admins[];
+	private static Match matches[];
+	private static AdminFileHandler AdminfilerHandler;
+	private static ClientFileHandler ClientfilerHandler;
+	private static MatchFileHandler matchFileHandler;
 	
 	static {
+		//src/Database/source/
 		AdminfilerHandler = new AdminFileHandler("Database/source/admins.ser");
 		ClientfilerHandler = new ClientFileHandler("Database/source/clients.ser");
 		matchFileHandler = new MatchFileHandler("Database/source/matches.ser");
@@ -209,12 +210,12 @@ public abstract class Database {
 		Tools.clear();
 		
 		if(confirmation) {
-			System.out.println(Menu.space + "Match Added");
+			Tools.clearPrintHold("Match Added");
 		}else {
-			System.out.println(Menu.space + "Match cannot be added. Maybe storage is full");
+			Tools.clearPrintHold("Match cannot be added. Maybe storage is full");
 		}
 		
-		Tools.etoc();
+		
 	}
 	
 	
@@ -249,7 +250,7 @@ public abstract class Database {
 		ClientfilerHandler.write(clients);
 		matchFileHandler.write(matches);
 		
-		Tools.sleepFor("Saving ",4);
+		Tools.sleepFor("Saving ",3);
 	}
 	
 	public static void restoreData() {
@@ -257,12 +258,12 @@ public abstract class Database {
 		clients =  ClientfilerHandler.read();
 		matches = matchFileHandler.read();
 		
-		Tools.sleepFor("Fetching data ", 4);
+		Tools.sleepFor("Fetching data ", 3);
 	}
 	
 	
 	// counts
-	public int countClients() {
+	public static int countClients() {
 		int count = 0;
 		for(int i = 0; i < clients.length; i++) {
 			if(clients[i]!= null ) {
@@ -273,7 +274,7 @@ public abstract class Database {
 		return count;
 	}
 	
-	public int countMatch() {
+	public static int countMatch() {
 		int count = 0;
 		for(int i = 0; i < matches.length; i++) {
 			if(matches[i]!= null ) {

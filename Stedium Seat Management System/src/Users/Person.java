@@ -1,11 +1,14 @@
 package Users;
+
+import java.io.Serializable;
+
 /*
  * This class is written by Rianul Amin Rian
  * ID : 21-44589-1
  * 
  */
 
-public class Person{
+public class Person implements Serializable{
 	
 	private String name;
 	private int age;

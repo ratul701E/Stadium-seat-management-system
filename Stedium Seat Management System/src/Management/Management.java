@@ -2,17 +2,20 @@ package Management;
 import Menus.Menu;
 import Database.*;
 import StediumStuffs.Account;
+import StediumStuffs.Mail;
 import StediumStuffs.Match;
 import StediumStuffs.Ticket;
+import Users.Admin;
 import Users.Client;
 
-public class Management {
+public abstract class Management {
 	public static void ManageMatch(Match match) {
 		int choice;
 		while(true) {
 			
 			Tools.clear();
 			
+			match.fullDetails();
 			
 			// manage match menu
 			
@@ -26,19 +29,19 @@ public class Management {
 			}
 			
 			case 1: {
-				System.out.println("\t\t==== Current Description ====\n" + match.getDesciption());
+				System.out.println(Menu.space + "\t\t==== Current Description ====\n" + match.getDesciption());
 				match.setDesciption(Tools.getInput("Enter new description"));
 				break;
 			}
 
 			case 2: {
-				System.out.println("Current match type : " + match.getMatchType());
+				System.out.println(Menu.space + "Current match type : " + match.getMatchType());
 				match.setMatchType(Tools.getInput("Enter new match type"));
 				break;	
 			}
 			
 			case 3: {
-				System.out.println("Current match day : " + match.getMatchDay());
+				System.out.println(Menu.space + "Current match day : " + match.getMatchDay());
 				match.setMatchDay(Tools.getInput("Enter new match Day"));
 				break;	
 			}
@@ -55,18 +58,18 @@ public class Management {
 					
 					if(choice == 4) {
 						match.setVipSeats(0);
-						System.out.println("Changed to 0");
+						Menu.menus.popup("Changed to 0");
 						continue;
 					}
 					else if(choice == 0) {
 						break;
 					}
 					
-					System.err.print("Enter seat(s) (Current : " + match.getVipSeats() + ") : ");
+					System.out.print(Menu.space + "Enter seat(s) (Current : " + match.getVipSeats() + ") : ");
 					int seat = Tools.getInputI(null);
 					
 					if(seat < 0) {
-						System.out.println("Failed to change");
+						Menu.menus.popup("Failed to change");
 						continue;
 					}
 					else if(choice == 1) {
@@ -79,7 +82,7 @@ public class Management {
 						match.removeVipSeats(seat);
 					}
 	
-					System.out.println("Successfully changed");
+					Menu.menus.popup("Successfully changed");
 					continue;
 				}
 				break;
@@ -96,19 +99,19 @@ public class Management {
 					
 					if(choice == 4) {
 						match.setNormalSeats(0);
-						System.out.println("Changed to 0");
+						Menu.menus.popup("Changed to 0");
 						continue;
 					}
 					else if(choice == 0) {
 						break;
 					}
 					
-					System.err.print("Enter seat(s) (Current : " + match.getNormalSeats() + ") : ");
+					System.err.print(Menu.space + "Enter seat(s) (Current : " + match.getNormalSeats() + ") : ");
 					int seat = Tools.getInputI(null);
 					
 					
 					if(seat < 0) {
-						System.out.println("Failed to change");
+						Menu.menus.popup("Failed to change");
 						continue;
 					}
 					else if(choice == 1) {
@@ -121,25 +124,61 @@ public class Management {
 						match.removeNormalSeats(seat);
 					}
 					
-					System.out.println("Successfully changed");
+					Menu.menus.popup("Successfully changed");
 					continue;
 				}
 				break;
 			}
 			
 			case 6: {
-				System.out.println("Current validity : " + match.getValid());
-				System.out.println("\nany invalid input set auto invalid\n"
-						+ "1. valid\n"
-						+ "2. invalid\n >> ");
+				System.out.println(Menu.space + "Current validity : " + match.getValid());
+				System.out.println("\n" + Menu.space + "any invalid input set auto invalid\n"
+						+ Menu.space + "1. valid\n"
+						+ Menu.space + "2. invalid\n >> ");
 				
 				choice = Tools.getInputI(null);
 				if(choice == 1) match.setValid(true);
 				else match.setValid(false);
 				break;
 			}
+			
+			case 7:{
+				// delete match permanently
+				Tools.clear();
+				System.out.print(Menu.space + "Are your sure to remove this Match ?\n"
+						+ Menu.space + "1. Yes\n"
+						+  Menu.space + "2. No\n"
+						+  Menu.space + "3. Cancel\n"
+						+  Menu.space + "  >> ");
+				
+				choice = Tools.getInputI(null);
+				if(choice == 1) {
+					Client clients[] = match.getClients();
+					
+					for(int i = 0; i < clients.length; i++) {
+						if(clients[i]!= null ) {
+							if(clients[i].searchTicket(match.getId()).getType().equals("VIP")) {
+								clients[i].getAccount().addBalance(match.getVipCost() * clients[i].searchTicket(match.getId()).getQuantities());
+							}else {
+								clients[i].getAccount().addBalance(match.getNormalCost() * clients[i].searchTicket(match.getId()).getQuantities());
+							}
+							clients[i].addMail(new Mail("System Generated Mail", "Match id [" + match.getId() + "] is removed by admin.\n" + Menu.space + "Money refunded.", true));
+							clients[i].removeTicket(match.getId());
+						}
+					}
+					
+					Database.removeMatch(match);
+					Tools.clearPrintHold("Match Removed");
+					return;
+				}
+				else {
+					Tools.clearPrintHold("Operation cancelled");
+				}
+				break;
+			}
+			
 			default:
-				System.out.println("Invalid choise... press enter to continue");
+				System.out.println(Menu.space + "Invalid choise... press enter to continue");
 				Database.scanner.nextLine();
 			}
 			
@@ -311,6 +350,29 @@ public class Management {
 					
 					break;
 				}
+				
+				case 9: {
+					Tools.clear();
+					System.out.print(Menu.space + "Are your sure to remove this person ?\n"
+							+ Menu.space + "1. Yes\n"
+							+  Menu.space + "2. No\n"
+							+  Menu.space + "3. Cancel\n"
+							+  Menu.space + "  >> ");
+					
+					choice = Tools.getInputI(null);
+					if(choice == 1) {
+						Database.removeClient(client);
+						Tools.clearPrintHold("Client rmeoved");
+						return;
+					}
+					else {
+						Tools.clearPrintHold("Operation cancelled");
+					}
+					
+					
+					
+				break;	
+				}
 				default :{
 					Tools.clearPrintHold("Invalid choice");
 				}
@@ -355,6 +417,96 @@ public class Management {
 		
 	}
 	
+	public static void changeAdminUP(Admin admin){
+		while(true) {
+			Tools.clear();
+			System.out.print(Menu.space + "==== Username and Password Setting ====\n\n"
+					+ Menu.space + "1. Change username\n"
+					+ Menu.space + "2. Change password\n"
+					+ Menu.space + "0. Back\n\n"
+					+ Menu.space + "  >> ");
+			
+			int choice = Tools.getInputI(null);
+			
+			switch(choice) {
+				case 0 :{
+					return;
+				}
+				
+				case 1 :{
+					Tools.clear();
+					System.out.println(Menu.space + "Current username : " + admin.getUsername());
+					String username = Tools.getInput("Enter new username");
+					if(Database.isUsernameExist(username)) {
+						Tools.clearPrintHold("Username already taken");
+						break;
+					}
+					else {
+						Tools.clearPrintHold("Username changed to : " + username);
+						admin.setUsername(username);
+					}
+					break;
+				}
+				
+				case 2 :{
+					Tools.clear();
+					admin.setPassword(Tools.getInput("Enter new password"));
+					Tools.clearPrintHold("Password Changed");
+					break;
+				}
+				
+				default : {
+					Tools.clearPrintHold("Invalid option");
+				}
+			}
+		}
+	}
+	
+	
+	public static void changeClientUP(Client client){
+		while(true) {
+			Tools.clear();
+			System.out.print(Menu.space + "==== Username and Password Setting ====\n\n"
+					+ Menu.space + "1. Change username\n"
+					+ Menu.space + "2. Change password\n"
+					+ Menu.space + "0. Back\n\n"
+					+ Menu.space + "  >> ");
+			
+			int choice = Tools.getInputI(null);
+			
+			switch(choice) {
+				case 0 :{
+					return;
+				}
+				
+				case 1 :{
+					Tools.clear();
+					System.out.println(Menu.space + "Current username : " + client.getUsername());
+					String username = Tools.getInput("Enter new username");
+					if(Database.isUsernameExist(username)) {
+						Tools.clearPrintHold("Username already taken");
+						break;
+					}
+					else {
+						Tools.clearPrintHold("Username changed to : " + username);
+						client.setUsername(username);
+					}
+					break;
+				}
+				
+				case 2 :{
+					Tools.clear();
+					client.setPassword(Tools.getInput("Enter new password"));
+					Tools.clearPrintHold("Password Changed");
+					break;
+				}
+				
+				default : {
+					Tools.clearPrintHold("Invalid option");
+				}
+			}
+		}
+	}
 	
 	//
 	

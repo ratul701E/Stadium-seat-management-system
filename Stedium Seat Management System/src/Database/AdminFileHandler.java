@@ -9,9 +9,10 @@ import Users.Admin;
 
 
 public class AdminFileHandler {
-	public ObjectOutputStream objOut;
-	public ObjectInputStream objIn;
-	private String path;
+
+	public ObjectOutputStream objOut;	// to write object in file
+	public ObjectInputStream objIn;		// to read object from file
+	private String path;				// file path string
 	
 	public AdminFileHandler(String path) {
 		this.path = path;
@@ -26,7 +27,7 @@ public class AdminFileHandler {
 		try {
 			for(int i = 0; i < admins.length; i++) {
 				if(admins[i] != null) {
-					objOut.writeObject(admins[i]);
+					objOut.writeObject(admins[i]);	//saving object in file
 					//System.out.println("Wrote");
 				}
 			}
@@ -35,9 +36,9 @@ public class AdminFileHandler {
 		}
 		finally {
 			try {
-				objOut.close();
+				objOut.close();		//closing file
 			} catch (IOException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		}
 	}
@@ -46,14 +47,14 @@ public class AdminFileHandler {
 		try {
 			objIn = new ObjectInputStream(Files.newInputStream(Paths.get(path)));
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		Admin[] admins = new Admin[200];
 		int i = 0;
 		try{
 			
 			do {
-				Admin temp = (Admin) objIn.readObject();
+				Admin temp = (Admin) objIn.readObject(); 	// read object and casting to appropriate class
 				if(temp != null ) {
 					admins[i]= temp; 
 					i++;
@@ -68,14 +69,14 @@ public class AdminFileHandler {
 		}
 		catch(Exception e){
 			
-			e.printStackTrace();
+			//e.printStackTrace();
 			return null;
 		}
 		finally{
 			try {
 				objIn.close();
 			} catch (IOException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		}
 	}

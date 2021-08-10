@@ -26,7 +26,7 @@ public class Start {
 		Database.addMatch(match7);
 		
 		*/
-		//Client c1 = new Client("Ratul", 20, "Male", "01920221554", "Nandipara", "Ratul@gmail.com","ratul","ratul", new Account(0));
+		//Client c1 = new Client("Ratul", 20, "Male", "01920221554", "Nandipara", "Ratul@gmail.com","ratul","ratul", new Account(1000));
 		//Client c2 = new Client("Priya", 20, "Female", "017.......23", "Gazipur", "Priya@gmail.com","asiya","asiya", new Account(0));
 		//Admin a1= new Admin("Rian", 20, "Male", "017.......23", "Gazipur", "Rian@gmail.com","rian","rian");
 		//Database.addClient(c2);

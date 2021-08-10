@@ -1,5 +1,8 @@
 package StediumStuffs;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 import Database.Database;
 import Management.Management;
@@ -40,7 +43,7 @@ public class Stadium {
 				}
 				
 				case 4 : {
-					// Group1Stedium.aboutUs();
+					this.aboutUs();
 					break;
 				}
 				
@@ -160,6 +163,8 @@ public class Stadium {
 			else break;
 		}
 		
+		Tools.clear();
+		
 		name = Tools.getInput("Enter your name*");
 		age = Tools.getInputI("Enter your age*");
 		gender = Tools.getInput("Enter your gender*");
@@ -171,6 +176,8 @@ public class Stadium {
 			
 			Tools.clear();
 			
+			System.out.println(Menu.space + "==== Please Remember Username and Password ====\n\n");
+			
 			username = Tools.getInput(("Enter your username*"));
 			if(!Database.isUsernameExist(username)) {
 				break;
@@ -179,13 +186,13 @@ public class Stadium {
 
 		}
 		
-		password = Tools.getInput("Enter your password");
+		password = Tools.getInput("Enter your password*");
 		
 		if(isAdmin) {
 			Database.addAdmin(new Admin(name,age,gender,number,address,email,username, password));
 		}
 		else Database.addClient(new Client(name,age,gender,number,address,email,username, password, new Account(5000)));
-		System.out.println(Menu.space + "Account created successfully");
+		Tools.clearPrintHold("Account created successfully");
 		
 		// enter to continue
 		
@@ -194,6 +201,11 @@ public class Stadium {
 	
 	
 	private Ticket bookTicket(Client client, Match match) {
+		
+		if(!match.getValid()) {
+			Tools.clearPrintHold("Match reservation turned off by admin");
+			return null;
+		}
 
 		Tools.clear();
 		System.out.println(Menu.space + "==== Welcome to Ticket Counter ====\n\n");
@@ -215,9 +227,10 @@ public class Stadium {
 				// booking vip seats
 				int seatCount = Tools.getInputI("How many seat you want");
 				
-				if(Management.canBuy(client, match.getVipCost()*seatCount) && match.getVipSeats()>= seatCount) {
+				if(match.getVipSeats()>= seatCount && Management.canBuy(client, match.getVipCost()*seatCount)) {
 					match.removeVipSeats(seatCount);
 					Tools.clearPrintHold("Booked");
+					match.addClient(client);
 					return new Ticket(match.getId(), seatCount, seatCount*match.getVipCost(),1);
 					
 				}
@@ -231,9 +244,10 @@ public class Stadium {
 				// booking normal seats
 				int seatCount = Tools.getInputI("How many seat you want");
 				
-				if(Management.canBuy(client, match.getNormalCost()*seatCount) && match.getNormalSeats()>= seatCount ) {
+				if(match.getNormalSeats()>= seatCount && Management.canBuy(client, match.getNormalCost()*seatCount)) {
 					match.removeNormalSeats(seatCount);
 					Tools.clearPrintHold("Booked");
+					match.addClient(client);
 					return new Ticket(match.getId(), seatCount, seatCount*match.getNormalCost(),2);
 				}
 				else {
@@ -277,27 +291,33 @@ public class Stadium {
 						
 						Tools.clear();
 						
-						client.showAllTickets();
+						if(!client.showAllTickets()) break innerMenu;
 						
-						System.out.print("\n" + Menu.space + "1. Cancel ticket\n"
+						System.out.print("\n" + Menu.space + "1. Show Match details\n"
+								+ Menu.space + "2. Cancel ticket\n"
 								+ Menu.space +  "0. Back\n"
 								+ Menu.space + "   >> ");
 						choice = Tools.getInputI(null);
 						
 						switch(choice) {
-							case 1:{
-								System.out.println(Menu.space + "Enter ID : ");
-								Ticket ticket = client.searchTicket(Tools.getInput(null));
-								if(ticket != null) {
-									if(client.removeTicket(ticket)) {
-										System.out.println(Menu.space + "Cancelled");
-										client.addToCancelledTicket(ticket);
-									} else {
-										System.out.println(Menu.space + "Can't cancel");
-									}
+						
+							case 1 : {
+								String id = Tools.getInput("Enter ID : ");
+								if(Database.searchMatch(id) != null) {
+									Database.searchMatch(id).shortDetails();
+								}else {
+									Tools.clearPrintHold("Invalid ticket id");
 								}
-								else {
-									System.out.println(Menu.space + "Invalid ID");
+								break;
+							}
+							
+							case 2:{
+								String id = Tools.getInput("Enter ID : ");
+								
+								if(client.removeTicket(id)) {
+									Tools.clearPrintHold("Cancelled");
+								} else {
+									Tools.clearPrintHold("Cannot cancel");
 								}
 								
 								
@@ -322,7 +342,10 @@ public class Stadium {
 					inner: while(true) {
 						
 						Tools.clear();
-						
+						if(Database.countMatch() == 0) {
+							Menu.menus.emptyMenu();
+							break inner;
+						}
 						Database.showAllMatches();
 						
 						Menu.menus.buyNewTicketMenu();
@@ -342,9 +365,10 @@ public class Stadium {
 								}
 								else {
 									Ticket ticket = this.bookTicket(client,Database.searchMatch(id));
-									client.addTicket(ticket);
-									client.addToPurchaseHistory(ticket);
-									
+									if(ticket != null) {
+										client.addTicket(ticket);
+										client.addToPurchaseHistory(ticket);
+									}
 								}
 								break;
 							}
@@ -374,6 +398,9 @@ public class Stadium {
 							cancelledTickets[i].showTicket();
 						}
 					}
+					
+					Tools.etoc();
+					
 					break;
 				}
 				
@@ -394,14 +421,16 @@ public class Stadium {
 						}
 					}
 					
+					Tools.etoc();
+					
 					break;
 				}
 				
 				case 5 :{
 					Tools.clear();
 					
-					//notifications
-					
+					//Change user-name and password
+					Management.changeClientUP(client);
 					break;
 				}
 				
@@ -542,6 +571,7 @@ public class Stadium {
 				case 2 : {
 					// manage matches
 					
+					admin.manageMatches();
 					
 					break;
 				}
@@ -551,6 +581,11 @@ public class Stadium {
 					while(true) {
 						
 						Tools.clear();
+						
+						if(Database.countClients() == 0) {
+							Menu.menus.emptyMenu();
+							break;
+						}
 						
 						Database.showAllClients();
 						
@@ -578,7 +613,7 @@ public class Stadium {
 						Tools.clear();
 						
 						
-						System.out.print(Menu.space + "==== Mailing ====\n\n"
+						System.out.print(Menu.space + "==== Mail ====\n\n"
 								+ Menu.space + "1. Inbox");
 						
 						if(admin.newMails()) System.out.println("   (new!)");
@@ -628,10 +663,12 @@ public class Stadium {
 								
 								Client receiver = Database.searchByEmail(recEmail);
 								if(receiver == null) {
+									Tools.clear();
 									System.out.println(Menu.space + "Invalid receiver email.");
 									Tools.etoc();
 								}
 								else {
+									Tools.clear();
 									receiver.addMail(new Mail(admin.getEmail(), message,true));
 									System.out.println(Menu.space + "Email sent successfully");
 									Tools.etoc();
@@ -647,12 +684,52 @@ public class Stadium {
 				}
 				
 				case 5 : {
-					// notifications
+					// change username and password
+					
+					Management.changeAdminUP(admin);
 					
 					
 					break;
 				}
+				
 			}
 		}
+	}
+	
+	private void aboutUs() {
+		String text="", temp;	
+		try
+		{
+			FileReader reader = new FileReader("StediumStuffs/About/aboutUs.txt");	//src/StediumStuffs/About/aboutUs.txt		
+			BufferedReader bfr = new BufferedReader(reader);					
+			
+			while((temp = bfr.readLine())!=null)		
+			{
+				text=text+temp+"\n"+"\r";			
+			} 				
+			reader.close();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+		
+		char inChars[] = text.toCharArray();
+		
+		Tools.clear();
+		System.out.println(Menu.space + "==== About Us ====\n\n");
+		
+		for(char i : inChars){
+			
+			System.out.print(i);
+			try{
+				Thread.sleep(10);
+			}catch(Exception e){
+				
+			}
+			
+		}
+		
+		Tools.etoc();
 	}
 }

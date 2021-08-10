@@ -8,9 +8,9 @@ import StediumStuffs.Match;
 
 
 public class MatchFileHandler {
-	public ObjectOutputStream objOut;
-	public ObjectInputStream objIn;
-	private String path;
+	public ObjectOutputStream objOut;		// to write object in file
+	public ObjectInputStream objIn;			// to read object from file
+	private String path;					// file path string
 	
 	public MatchFileHandler(String path) {
 		this.path = path;
@@ -20,23 +20,23 @@ public class MatchFileHandler {
 		try {
 			objOut = new ObjectOutputStream(Files.newOutputStream(Paths.get(path)));
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		try {
 			for(int i = 0; i < matches.length; i++) {
 				if(matches[i] != null) {
-					objOut.writeObject(matches[i]);
+					objOut.writeObject(matches[i]);		//saving object in file
 					//System.out.println("Wrote");
 				}
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		finally {
 			try {
 				objOut.close();
 			} catch (IOException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		}
 	}
@@ -45,14 +45,14 @@ public class MatchFileHandler {
 		try {
 			objIn = new ObjectInputStream(Files.newInputStream(Paths.get(path)));
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		Match[] matches = new Match[200];
 		int i = 0;
 		try{
 			
 			do {
-				Match temp = (Match) objIn.readObject();
+				Match temp = (Match) objIn.readObject();		// read object and casting to appropriate class
 				if(temp != null ) {
 					matches[i]= temp; 
 					i++;
@@ -67,14 +67,14 @@ public class MatchFileHandler {
 		}
 		catch(Exception e){
 			
-			e.printStackTrace();
+			//e.printStackTrace();
 			return null;
 		}
 		finally{
 			try {
 				objIn.close();
 			} catch (IOException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		}
 	}

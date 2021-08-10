@@ -85,6 +85,7 @@ public class Match implements Serializable {
 		normalCost = cost;
 	}
 	
+
 	
 	
 	// gets
@@ -131,6 +132,10 @@ public class Match implements Serializable {
 	
 	public static int getIdCounter() {
 		return idCounter;
+	}
+	
+	public Client[] getClients() {
+		return clients;
 	}
 	
 	// add seats
@@ -191,6 +196,7 @@ public class Match implements Serializable {
 	}
 	
 	public void fullDetails() {
+		System.out.println(Menu.space + "==== About Match ====\n\n");
 		System.out.println(Menu.space + "ID : " + id);
 		System.out.println(Menu.space + "Match type : " + matchType);
 		System.out.println(Menu.space + "Date : " + matchDay);

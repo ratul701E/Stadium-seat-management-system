@@ -9,9 +9,9 @@ import Users.Client;
 
 
 public class ClientFileHandler {
-	public ObjectOutputStream objOut;
-	public ObjectInputStream objIn;
-	private String path;
+	public ObjectOutputStream objOut;		// to write object in file
+	public ObjectInputStream objIn;			// to read object in file
+	private String path;					// file path string
 	
 	public ClientFileHandler(String path) {
 		this.path = path;
@@ -26,7 +26,7 @@ public class ClientFileHandler {
 		try {
 			for(int i = 0; i < clients.length; i++) {
 				if(clients[i] != null) {
-					objOut.writeObject(clients[i]);
+					objOut.writeObject(clients[i]);		//saving object in file
 					//System.out.println("Wrote");
 				}
 			}
@@ -53,7 +53,7 @@ public class ClientFileHandler {
 		try{
 			
 			do {
-				Client temp = (Client) objIn.readObject();
+				Client temp = (Client) objIn.readObject();		// read object and casting to appropriate class
 				if(temp != null ) {
 					clients[i]= temp; 
 					i++;

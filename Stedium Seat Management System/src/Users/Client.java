@@ -117,16 +117,17 @@ public class Client extends Person implements IClientInterface, Serializable{
 	
 	// lists
 	
-	public void showAllTickets() {
+	public boolean showAllTickets() {
 		if(this.countTickets() == 0) {
 			Menu.menus.emptyMenu();
-			return;
+			return false;
 		}
 		for(int i = 0; i < tickets.length; i++) {
 			if(tickets[i] != null) {
 				tickets[i].showTicket();
 			}
 		}
+		return true;
 	}
 	
 	
@@ -225,15 +226,19 @@ public class Client extends Person implements IClientInterface, Serializable{
 		return false;
 	}
 	
-	public boolean removeTicket(Ticket ticket) {
+	public boolean removeTicket(String id) {
 		for(int i = 0; i < tickets.length; i++) {
-			if(tickets[i]== ticket ) {
-				tickets[i] = null;
-				return true;
+			if(tickets[i]!= null ) {
+				if(tickets[i].getId().equals(id)) {
+					this.addToCancelledTicket(tickets[i]);
+					tickets[i] = null;
+					return true;
+				}
 			}
 		}
 		return false;
 	}
+	
 	
 	public boolean removeFormCancelledTicket(Ticket ticket) {
 		for(int i = 0; i < cancelledTickets.length; i++) {
