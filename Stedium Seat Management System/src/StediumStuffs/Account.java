@@ -2,6 +2,7 @@ package StediumStuffs;
 
 import java.io.Serializable;
 
+import Management.Tools;
 import Menus.Menu;
 
 public class Account implements Serializable {
@@ -41,7 +42,7 @@ public class Account implements Serializable {
 	
 	public void deposid(double balance) {
 		if(balance < 500) {
-			System.out.println(Menu.space + "You cannot add less than 500. Please try with more money");
+			Tools.clearPrintHold("You cannot add less than 500. Please try with more money");
 			
 		}
 		

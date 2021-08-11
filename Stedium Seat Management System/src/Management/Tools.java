@@ -58,13 +58,7 @@ public abstract class Tools {
 	
 	
 	public static void clear() {
-		/*
-	    System.out.print("\033[H\033[2J");   
-	    System.out.flush();  
-	    */
-		
-		
-		
+	
 		 try {
 			new ProcessBuilder("cmd", "/c", "clear").inheritIO().start().waitFor();
 		} catch (InterruptedException e) {
@@ -75,18 +69,11 @@ public abstract class Tools {
 			e.printStackTrace();
 		}
 		
-		/*
-		for(int clear = 0; clear < 1000; clear++)
-		  {
-		     System.out.println("\b") ;
-		  }
-		  */
-
 	}
 	
 	public static void clearPrintHold(String message) {
 		Tools.clear();
-		System.out.println(Menu.space + message);
+		System.out.println("\n\n\n\n" + Menu.space + message);
 		Tools.etoc();
 		Tools.clear();
 	}

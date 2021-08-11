@@ -136,7 +136,7 @@ public class Menu {
 	public void portalMenu() {
 		//Tools.clear();
 		System.out.print(space + "==== Stadium Portal ====\n\n"
-				+ space + "1. Sign in\n"
+				+ space + "1. Login\n"
 				+ space + "2. Create an account\n"
 				+ space + "3. Contributions\n"
 				+ space + "4. About us\n"
@@ -184,8 +184,7 @@ public class Menu {
 				+ "--------------------------------------------\n\n");
 		}
 		*/
-		System.out.println(space + "  E  M  P  T  Y\n");
-		Tools.etoc();
+		Tools.clearPrintHold("  E  M  P  T  Y\n");
 	}
 	
 	public void ticketBuyErr() {

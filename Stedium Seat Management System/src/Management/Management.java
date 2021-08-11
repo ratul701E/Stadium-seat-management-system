@@ -29,18 +29,21 @@ public abstract class Management {
 			}
 			
 			case 1: {
-				System.out.println(Menu.space + "\t\t==== Current Description ====\n" + match.getDesciption());
+				Tools.clear();
+				System.out.println(Menu.space + "\t\t==== Current Description ====\n" + Menu.space + match.getDesciption());
 				match.setDesciption(Tools.getInput("Enter new description"));
 				break;
 			}
 
 			case 2: {
+				Tools.clear();
 				System.out.println(Menu.space + "Current match type : " + match.getMatchType());
 				match.setMatchType(Tools.getInput("Enter new match type"));
 				break;	
 			}
 			
 			case 3: {
+				Tools.clear();
 				System.out.println(Menu.space + "Current match day : " + match.getMatchDay());
 				match.setMatchDay(Tools.getInput("Enter new match Day"));
 				break;	
@@ -49,6 +52,7 @@ public abstract class Management {
 			case 4: {
 				while(true) {
 					do {
+						Tools.clear();
 						
 						// vip seat management menu
 						Menu.menus.vipSeatManage(match.getVipSeats());
@@ -79,7 +83,11 @@ public abstract class Management {
 						match.setVipSeats(seat);
 					}
 					else if(choice == 3) {
-						match.removeVipSeats(seat);
+						if(match.getVipSeats() >= seat) {
+							match.removeVipSeats(seat);
+						}else {
+							Tools.clearPrintHold("Cannot remove.");
+						}
 					}
 	
 					Menu.menus.popup("Successfully changed");
@@ -91,6 +99,7 @@ public abstract class Management {
 			case 5: {
 				while(true) {
 					do {
+						Tools.clear();
 						
 						Menu.menus.normalSeatManage(match.getNormalSeats());
 						
@@ -121,7 +130,11 @@ public abstract class Management {
 						match.setNormalSeats(seat);
 					}
 					else if(choice == 3) {
-						match.removeNormalSeats(seat);
+						if(match.getNormalSeats() >= seat) {
+							match.removeNormalSeats(seat);
+						}else {
+							Tools.clearPrintHold("Cannot remove.");
+						}
 					}
 					
 					Menu.menus.popup("Successfully changed");
@@ -132,13 +145,20 @@ public abstract class Management {
 			
 			case 6: {
 				System.out.println(Menu.space + "Current validity : " + match.getValid());
-				System.out.println("\n" + Menu.space + "any invalid input set auto invalid\n"
+				System.out.print("\n" + Menu.space + "any invalid input set auto invalid\n"
 						+ Menu.space + "1. valid\n"
-						+ Menu.space + "2. invalid\n >> ");
+						+ Menu.space + "2. invalid\n\n"
+						+ Menu.space + "  >> ");
 				
 				choice = Tools.getInputI(null);
-				if(choice == 1) match.setValid(true);
-				else match.setValid(false);
+				if(choice == 1) {
+					match.setValid(true);
+					Tools.clearPrintHold("Validity changed to : Valid");
+				}
+				else {
+					match.setValid(false);
+					Tools.clearPrintHold("Validity changed to : Invalid");
+				}
 				break;
 			}
 			
@@ -202,22 +222,22 @@ public abstract class Management {
 					return;
 				}
 				case 1 :{
-					System.out.println("Current id is : " + ticket.getId());
+					System.out.println(Menu.space + "Current id is : " + ticket.getId());
 					ticket.setId(Tools.getInput("Enter new id"));
 					break;
 				}
 				case 2 :{
-					System.out.println("Current seat available : " + ticket.getQuantities());
+					System.out.println(Menu.space + "Current seat available : " + ticket.getQuantities());
 					ticket.setQuantities(Tools.getInputI("Enter new Quantites"));
 					break;
 				}
 				case 3 :{
-					System.out.println("Current price is : " + ticket.getPrice());
+					System.out.println(Menu.space + "Current price is : " + ticket.getPrice());
 					ticket.setPrice(Tools.getInputD("Enter new price"));
 					break;
 				}
 				default : {
-					System.out.println("Invalid. Try again please");
+					System.out.println(Menu.space + "Invalid. Try again please");
 				}
 			}
 		}

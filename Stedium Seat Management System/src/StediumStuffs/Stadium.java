@@ -86,7 +86,7 @@ public class Stadium {
 						Tools.clearPrintHold("Logged in");
 						
 						//
-						this.accessUser(username);
+						this.accessClient(username);
 						//
 						
 						 break;
@@ -191,7 +191,7 @@ public class Stadium {
 		if(isAdmin) {
 			Database.addAdmin(new Admin(name,age,gender,number,address,email,username, password));
 		}
-		else Database.addClient(new Client(name,age,gender,number,address,email,username, password, new Account(5000)));
+		else Database.addClient(new Client(name,age,gender,number,address,email,username, password, new Account(1000)));
 		Tools.clearPrintHold("Account created successfully");
 		
 		// enter to continue
@@ -268,7 +268,7 @@ public class Stadium {
 	
 	//
 	
-	private void accessUser(String username) {
+	private void accessClient(String username) {
 		Client client = Database.getClinet(username);
 		
 		MenuLabel : while(true) {
@@ -295,7 +295,7 @@ public class Stadium {
 						
 						System.out.print("\n" + Menu.space + "1. Show Match details\n"
 								+ Menu.space + "2. Cancel ticket\n"
-								+ Menu.space +  "0. Back\n"
+								+ Menu.space +  "0. Back\n\n"
 								+ Menu.space + "   >> ");
 						choice = Tools.getInputI(null);
 						
@@ -304,7 +304,9 @@ public class Stadium {
 							case 1 : {
 								String id = Tools.getInput("Enter ID : ");
 								if(Database.searchMatch(id) != null) {
-									Database.searchMatch(id).shortDetails();
+									Tools.clear();
+									Database.searchMatch(id).fullDetails();
+									Tools.etoc();
 								}else {
 									Tools.clearPrintHold("Invalid ticket id");
 								}
@@ -589,8 +591,8 @@ public class Stadium {
 						
 						Database.showAllClients();
 						
-						String TempUsername = Tools.getInput("Enter client username (type exit to exit)");
-						if(TempUsername.equalsIgnoreCase("exit")) {
+						String TempUsername = Tools.getInput("Enter client username (back on 0)");
+						if(TempUsername.equals("0")) {
 							break;
 						}
 						Client  client= Database.getClinet(TempUsername);
@@ -663,15 +665,14 @@ public class Stadium {
 								
 								Client receiver = Database.searchByEmail(recEmail);
 								if(receiver == null) {
-									Tools.clear();
-									System.out.println(Menu.space + "Invalid receiver email.");
-									Tools.etoc();
+
+									Tools.clearPrintHold("Invalid receiver email.");
 								}
 								else {
-									Tools.clear();
+
 									receiver.addMail(new Mail(admin.getEmail(), message,true));
-									System.out.println(Menu.space + "Email sent successfully");
-									Tools.etoc();
+									Tools.clearPrintHold("Email sent successfully");
+
 								}
 								
 								break;
