@@ -1,3 +1,10 @@
+/*
+ * This class is written by Rianul Amin Rian
+ * Id : 21-44589-1
+ * 
+ * 
+ */
+
 package Users;
 import java.io.Serializable;
 
@@ -9,11 +16,6 @@ import StediumStuffs.Match;
 import StediumStuffs.Notification;
 import StediumStuffs.Ticket;
 
-/*
- * This class is written by Asraful Alam Ratul
- * ID : 21-44588-1
- * 
- */
 
 public class Client extends Person implements IClientInterface, Serializable{
 	private String username;

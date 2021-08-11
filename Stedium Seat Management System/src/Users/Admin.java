@@ -1,3 +1,10 @@
+/*
+ * This class is written by Rianul Amin Rian
+ * Id : 21-44589-1
+ * 
+ * 
+ */
+
 package Users;
 import java.io.Serializable;
 
@@ -10,12 +17,6 @@ import StediumStuffs.Feedback;
 import StediumStuffs.Mail;
 import StediumStuffs.Match;
 import StediumStuffs.Notification;
-
-/*
- * This class is written by Asraful Alam Ratul
- * ID : 21-44588-1
- * 
- */
 
 public class Admin extends Person implements IAdminInterface, Serializable{
 	private String email;

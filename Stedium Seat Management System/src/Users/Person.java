@@ -1,12 +1,13 @@
-package Users;
-
-import java.io.Serializable;
-
 /*
  * This class is written by Rianul Amin Rian
- * ID : 21-44589-1
+ * Id : 21-44589-1
+ * 
  * 
  */
+
+package Users;
+import java.io.Serializable;
+
 
 public class Person implements Serializable{
 	

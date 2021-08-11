@@ -1,3 +1,7 @@
+/*
+ * This class is written by whole team
+ */
+
 package StediumStuffs;
 
 import java.io.BufferedReader;

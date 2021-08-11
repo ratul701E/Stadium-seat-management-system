@@ -1,3 +1,10 @@
+/*
+ * This class is written by Asraful Alam Ratul
+ * Id : 21-44588-1
+ * 
+ * 
+ */
+
 package Database;
 import java.util.Scanner;
 import Management.*;
@@ -16,15 +23,15 @@ public abstract class Database {
 	
 	static {
 		//src/Database/source/
-		AdminfilerHandler = new AdminFileHandler("Database/source/admins.ser");
-		ClientfilerHandler = new ClientFileHandler("Database/source/clients.ser");
-		matchFileHandler = new MatchFileHandler("Database/source/matches.ser");
+		AdminfilerHandler = new AdminFileHandler("Database/source/admins.ser");		// for save admin files
+		ClientfilerHandler = new ClientFileHandler("Database/source/clients.ser");	// for save client files
+		matchFileHandler = new MatchFileHandler("Database/source/matches.ser");		// for save match files
 	}
 	
 	
 	public static Scanner scanner = new Scanner(System.in);
 	
-	static {
+	static {						// initializing field
 		clients = new Client[200];
 		admins = new Admin[200];
 		matches = new Match[200];
@@ -134,6 +141,7 @@ public abstract class Database {
 		return 0;
 	}
 	
+	// gets
 	
 	public static Client getClinet(String username) {
 		for(int i = 0; i < clients.length; i++) {
@@ -185,7 +193,7 @@ public abstract class Database {
 	
 	// taking information
 	
-	public static void createMatch() {
+	public static void createMatch() {									// creating a new match
 		Tools.clear();
 		System.out.println(Menu.space + "==== New Match ====\n\n");
 		String id = Match.GeneratMatchId();
