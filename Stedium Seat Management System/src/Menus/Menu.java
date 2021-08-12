@@ -1,7 +1,6 @@
 /*
- * This interface is written by Asiya Akter
+ * This class is written by Asiya Akter
  * Id : 21-44386-1
- * 
  * 
  */
 
@@ -191,7 +190,7 @@ public class Menu {
 				+ "--------------------------------------------\n\n");
 		}
 		*/
-		Tools.clearPrintHold("  E  M  P  T  Y\n");
+		Tools.clearPrintHold("    E  M  P  T  Y\n");
 	}
 	
 	public void ticketBuyErr() {

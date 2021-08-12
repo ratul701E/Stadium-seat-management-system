@@ -20,7 +20,7 @@ public class Stadium {
 	public void startServer() {
 		Database.restoreData();
 		int choice;
-		inner: while(true) {
+		while(true) {
 		
 			Tools.clear();
 			
@@ -42,7 +42,7 @@ public class Stadium {
 				}
 				
 				case 3 : {
-					// Group1Stedium.Contribute();
+					contributions();
 					break;
 				}
 				
@@ -155,8 +155,10 @@ public class Stadium {
 			
 			System.out.print(Menu.space + "1. As client\n"
 					+ Menu.space + "2. As admin\n"
+					+ Menu.space + "0. Back\n"
 					+ Menu.space + ">> ");
 			int choice = Tools.getInputI(null);
+			if(choice == 0) return;
 			if(choice == 2) {
 				isAdmin = true;
 				break;
@@ -722,7 +724,44 @@ public class Stadium {
 		char inChars[] = text.toCharArray();
 		
 		Tools.clear();
-		System.out.println(Menu.space + "==== About Us ====\n\n");
+		System.out.println(Menu.space + "\t\t\t==== About us ====\n\n");
+		
+		for(char i : inChars){
+			
+			System.out.print(i);
+			try{
+				Thread.sleep(10);
+			}catch(Exception e){
+				
+			}
+			
+		}
+		
+		Tools.etoc();
+	}
+	
+	private void contributions(){
+		String text="", temp;	
+		try
+		{
+			FileReader reader = new FileReader("StediumStuffs/About/contributions.txt");	//src/StediumStuffs/About/contributions.txt		
+			BufferedReader bfr = new BufferedReader(reader);					
+			
+			while((temp = bfr.readLine())!=null)		
+			{
+				text=text+temp+"\n"+"\r";			
+			} 				
+			reader.close();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+		
+		char inChars[] = text.toCharArray();
+		
+		Tools.clear();
+		System.out.println("\t\t\t\t==== Contributions ====\n\n");
 		
 		for(char i : inChars){
 			

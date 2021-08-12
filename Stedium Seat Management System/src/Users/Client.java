@@ -2,7 +2,6 @@
  * This class is written by Rianul Amin Rian
  * Id : 21-44589-1
  * 
- * 
  */
 
 package Users;
@@ -210,7 +209,7 @@ public class Client extends Person implements IClientInterface, Serializable{
 	
 	public boolean removeMail(Mail mail) {
 		for(int i = 0; i < mails.length; i++) {
-			if(mails[i]== mail ) {
+			if(mails[i] == mail ) {
 				mails[i] = null;
 				return true;
 			}

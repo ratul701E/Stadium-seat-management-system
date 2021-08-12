@@ -1,0 +1,40 @@
+                                 Asraful Alam Ratul
+                                     classes
+	
+	                       	      Database
+			        Admin file management
+			        Client file management
+	                        Match file management
+	
+	
+	
+                                   Most Asiya Akter
+                                       classes
+	
+	                                Menu
+	                                Match
+	                                Admin
+	                                Person
+	
+	
+
+                                Rianul Amin Rian(Tester)
+                                      classes
+	
+	                           Admin Interface
+	                              Tools
+	                             Database
+	
+	
+	
+                                Fardin Ibna Rahman
+                                     classes
+	
+	                             Account
+	                              Mail
+	                             Ticket
+	                         Client Interface
+	
+	
+	
+	

@@ -1,10 +1,8 @@
 /*
- * This class is written by Rianul Amin Rian
- * Id : 21-44589-1
- * 
+ * This class is written by Asiya Akter
+ * Id : 21-44386-1
  * 
  */
-
 package Users;
 import java.io.Serializable;
 

@@ -1,7 +1,6 @@
 /*
- * This class is written by Asraful Alam Ratul
- * Id : 21-44588-1
- * 
+ * This class is written by Rianul Amin Rian
+ * Id : 21-44589-1
  * 
  */
 package Management;
@@ -17,7 +16,9 @@ public abstract class Tools {
 		 * this method will take a input from user and return. If input is empty then it will show a warning and again ask for input
 		 */
 		while(true) {
-			if(message != null) System.out.print(Menu.space + message + " : ");
+			if(message != null) {
+				System.out.print(Menu.space + message + " : ");
+			}
 			
 			String returnValue = Database.scanner.nextLine();
 			if(returnValue.isEmpty()) {

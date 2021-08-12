@@ -1,3 +1,9 @@
+/*
+ * This interface is written by Fardin Ibna Rahman
+ * Id : 21-44705-1
+ * 
+ */
+
 package StediumStuffs;
 
 import java.io.Serializable;
@@ -15,6 +21,7 @@ public class Ticket implements Serializable{
 	
 	
 	public Ticket() {}
+	
 	public Ticket(String ID, int quantities, double price, int type) {
 		this.ID = ID;
 		this.quantities = quantities;

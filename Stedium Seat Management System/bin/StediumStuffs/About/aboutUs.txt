@@ -1,0 +1,5 @@
+Admin Features: The admin has the power to add or delete tickets, edit match details, control seat quality, and quantity, manage client info, and change anything if necessary. The admin can even communicate with the client via mail. 
+
+Client Features: Clients can create an account and sign in to buy tickets. All the clients are given a 1000 BDT by default, but they can mail the admins to deposit money to purchase tickets if they need more. The clients can buy tickets for a particular game using a unique match id. They can cancel their tickets anytime they want to. If the match is canceled, the client will get a mail from the admin regarding the cancellation. The clients can mail the admins anytime if they need any help. History of all the purchases made and refunded are stored in the history section.
+
+All the data of both admins and clients are stored in the database.

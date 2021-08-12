@@ -151,7 +151,8 @@ public abstract class Management {
 			}
 			
 			case 6: {		// change validity
-				
+			
+				Tools.clear();
 				System.out.println(Menu.space + "Current validity : " + match.getValid());
 				System.out.print("\n" + Menu.space + "any invalid input set auto invalid\n"
 						+ Menu.space + "1. valid\n"

@@ -1,3 +1,9 @@
+/*
+ * This class is written by Asiya Akter
+ * Id : 21-44386-1
+ * 
+ */
+
 package StediumStuffs;
 import java.io.Serializable;
 
@@ -5,7 +11,6 @@ import Database.Database;
 import Menus.Menu;
 import Users.Client;
 
-// ratul
 
 public class Match implements Serializable {
 	private String description;

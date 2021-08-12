@@ -1,3 +1,9 @@
+/*
+ * This interface is written by Fardin Ibna Rahman
+ * Id : 21-44705-1
+ * 
+ */
+
 package StediumStuffs;
 
 import java.io.Serializable;
@@ -12,6 +18,7 @@ public class Mail implements Serializable{
 	
 	
 	public Mail(){}
+	
 	public Mail(String sender, String message){
 		this.sender = sender;
 		this.message = message;
