@@ -1,5 +1,5 @@
 /*
- * This interface is written by Rianul Amin Rian
+ * Rianul Amin Rian writes this interface
  * Id : 21-44589-1
  * 
  */

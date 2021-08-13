@@ -1,5 +1,5 @@
 /*
- * This class is written by Asraful Alam Ratul
+ * Asraful Alam Ratul writes this class
  * Id : 21-44588-1
  * 
  */

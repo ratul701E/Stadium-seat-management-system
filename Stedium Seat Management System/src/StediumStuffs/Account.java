@@ -1,5 +1,5 @@
 /*
- * This interface is written by Fardin Ibna Rahman
+ * Fardin Ibna Rahman writes this class
  * Id : 21-44705-1
  * 
  */
@@ -48,7 +48,7 @@ public class Account implements Serializable {
 	
 	public void deposid(double balance) {
 		if(balance < 500) {
-			Tools.clearPrintHold("You cannot add less than 500. Please try with more money");
+			Tools.clearPrintHold("You cannot add less than 500. Would you mind trying with more money");
 			
 		}
 		

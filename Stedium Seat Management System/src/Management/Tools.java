@@ -1,5 +1,5 @@
 /*
- * This class is written by Rianul Amin Rian
+ * Rianul Amin Rian writes this class
  * Id : 21-44589-1
  * 
  */
@@ -22,7 +22,7 @@ public abstract class Tools {
 			
 			String returnValue = Database.scanner.nextLine();
 			if(returnValue.isEmpty()) {
-				System.out.print(Menu.space + "This field cannot empty. Try Again");
+				System.out.print(Menu.space + "This field cannot be empty. Try Again");
 				System.out.print(Menu.space +  "  >> ");
 				continue;
 			}
@@ -42,7 +42,7 @@ public abstract class Tools {
 			try {
 				return Integer.parseInt(returnValue);
 			}catch(NumberFormatException err){
-				System.out.print(Menu.space + "This field dosen't suppot this kind of data");
+				System.out.print(Menu.space + "This field doesn't support this kind of data");
 				System.out.print("\n" + Menu.space +  "  >> ");
 				continue;
 			}
@@ -60,7 +60,7 @@ public abstract class Tools {
 			try {
 				return Double.parseDouble(returnValue);
 			}catch(NumberFormatException err){
-				System.out.print(Menu.space + "This field dosen't suppot this kind of data");
+				System.out.print(Menu.space + "This field doesn't support this kind of data");
 				System.out.print("\n" + Menu.space +  "  >> ");
 				continue;
 			}

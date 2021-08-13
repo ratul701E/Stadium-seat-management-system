@@ -1,5 +1,5 @@
 /*
- * This class is written by Asiya Akter
+ * Asiya Akter writes this class
  * Id : 21-44386-1
  * 
  */
@@ -19,12 +19,12 @@ public class Menu {
 	
 	public void clientInterface(boolean newMails) {
 		System.out.print(space + "==== Client ====\n\n"
-				+ space + "1. My tickets\n"
-				+ space + "2. Buy tickets\n"
-				+ space + "3. Cancelled tickets\n"
-				+ space + "4. Purchase history\n"
-				+ space + "5. Change username and password\n"
-				+ space + "6. Account information\n"
+				+ space + "1. My Tickets\n"
+				+ space + "2. Buy Tickets\n"
+				+ space + "3. Cancelled Tickets\n"
+				+ space + "4. Purchase History\n"
+				+ space + "5. Change Username and Password\n"
+				+ space + "6. Account Balance\n"
 				+ space + "7. Mail");
 		
 		if(newMails) {
@@ -48,7 +48,7 @@ public class Menu {
 		}else {
 			System.out.println();
 		}
-				System.out.print(space + "5. Change username and password\n"
+				System.out.print(space + "5. Change Username and Password\n"
 				+ space + "0. Logout\n"
 				+ "\n" + space + " >> ");
 	}
@@ -57,23 +57,23 @@ public class Menu {
 	
 	public void matchControlMenu() {
 		System.out.print(space + "==== Manage Match  ====\n\n" // ( Match ID : " + match.getId() + " )
-				+ space + "1. Change description\n"
-				+ space + "2. Change match type\n"
+				+ space + "1. Change Description\n"
+				+ space + "2. Change Match type\n"
 				+ space + "3. Change Match Day\n"
 				+ space + "4. Change/modify vip seat number\n"
 				+ space + "5. Change/modify normal seat numbers\n"
-				+ space + "6. Change validity\n"
-				+ space + "7. Remove match\n"
+				+ space + "6. Change Validity\n"
+				+ space + "7. Remove Match\n"
 				+ space + "0. Exit \n"
 				+ "\n" + space + "  >> "); 
 	}
 	
 	public void vipSeatManage(int seats) {
 		System.out.print(space + "==== Vip Seat Management (seat : " + seats + " ) ====\n\n"
-				+ space + "1. Add seat(s)\n"
-				+ space + "2. Change total seat\n"
-				+ space + "3. Remove seat\n"
-				+ space + "4. Make empty\n"
+				+ space + "1. Add Seat(s)\n"
+				+ space + "2. Change Total seat\n"
+				+ space + "3. Remove Seat\n"
+				+ space + "4. Make Empty\n"
 				+ space + "0. Exit\n"
 				+ "\n" + space + "  >> ");
 	}
@@ -81,10 +81,10 @@ public class Menu {
 	
 	public void normalSeatManage(int seats) {
 		System.out.print(space + "==== Normal Seat Management (seat : " + seats + " ) ====\n\n"
-				+ space + "1. Add seat(s)\n"
-				+ space + "2. Change total seat\n"
-				+ space + "3. Remove seat\n"
-				+ space + "4. Make empty\n"
+				+ space + "1. Add Seat(s)\n"
+				+ space + "2. Change Total Seat\n"
+				+ space + "3. Remove Seat\n"
+				+ space + "4. Make Empty\n"
 				+ space + "0. Exit\n"
 				+ "\n" + space + "  >> ");
 	}
@@ -98,21 +98,21 @@ public class Menu {
 	
 	public void clientManagementMenu() {
 		System.out.println(
-				  space + "1. Change name\n"
+				  space + "1. Change Name\n"
 				+ space + "2. Change Age\n"
 				+ space + "3. Change Gender\n"
-				+ space + "4. Change number\n"
+				+ space + "4. Change Number\n"
 				+ space + "5. Change Address\n"
 				+ space + "6. Change Email\n"
-				+ space + "7. Account details\n"
+				+ space + "7. Manage Account\n"
 				+ space + "8. Manage Tickets\n"
-				+ space + "9. Remove client\n"
+				+ space + "9. Remove Client\n"
 				+ space + "0. Exit\n");
 	}
 	
 	
 	public void accountManageMenu(double balance) {
-		System.out.print(space + "==== Manage Account (Available Balance : " + balance + ")====\n\n"
+		System.out.print(space + "==== Manage Account ( Available Balance : " + balance + " )====\n\n"
 				+ space + "1. Change Balance (sensitive)\n"
 				+ space + "2. Deposit Money\n"
 				+ space + "0. Exit\n"
@@ -123,7 +123,7 @@ public class Menu {
 	public void ticketManageMenu() {
 		System.out.print(space + "==== Ticket Manager ====\n\n"
 				+ space + "1. Change ID (be careful)\n"
-				+ space + "2. Change seat quantites\n"
+				+ space + "2. Change Seat Quantites\n"
 				+ space + "3. Change Price\n"
 				+ space + "0. Exit\n"
 				+ "\n" + space + "  >> ");
@@ -132,8 +132,8 @@ public class Menu {
 	
 	public void loginMenu() {
 		System.out.print(space + "==== Log in Menu ====\n\n"
-				+ space + "1. Client login\n"
-				+ space + "2. Admin login\n"
+				+ space + "1. Client Login\n"
+				+ space + "2. Admin Login\n"
 				+ space + "0. Back\n"
 				+ "\n" + space + "  >> ");
 	}
@@ -143,10 +143,10 @@ public class Menu {
 		//Tools.clear();
 		System.out.print(space + "==== Stadium Portal ====\n\n"
 				+ space + "1. Login\n"
-				+ space + "2. Create an account\n"
+				+ space + "2. Create an Account\n"
 				+ space + "3. Contributions\n"
-				+ space + "4. About us\n"
-				+ space + "0. Stop server\n"
+				+ space + "4. About Us\n"
+				+ space + "0. Stop Server\n"
 				+ "\n" + space + "  >> ");
 	}
 	
@@ -158,7 +158,7 @@ public class Menu {
 		else System.out.println();
 		
 				System.out.print(space + "2. Mail to Admin\n"
-				+ space + "3. Mail to another Client\n"
+				+ space + "3. Mail to Another Client\n"
 				+ space + "0. Back\n"
 				+ "\n" + space + "  >> ");
 	}
@@ -190,7 +190,7 @@ public class Menu {
 				+ "--------------------------------------------\n\n");
 		}
 		*/
-		Tools.clearPrintHold("    E  M  P  T  Y\n");
+		Tools.clearPrintHold("     E  M  P  T  Y\n");
 	}
 	
 	public void ticketBuyErr() {

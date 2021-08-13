@@ -1,5 +1,5 @@
 /*
- * This interface is written by Fardin Ibna Rahman
+ * Fardin Ibna Rahman writes this class
  * Id : 21-44705-1
  * 
  */

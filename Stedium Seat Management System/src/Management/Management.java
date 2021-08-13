@@ -1,5 +1,5 @@
 /*
- * This class is written by Asraful Alam Ratul
+ * Asraful Alam Ratul writes this class
  * Id : 21-44588-1
  * 
  * 
@@ -279,37 +279,43 @@ public abstract class Management {
 					return;
 				}
 				
-				case 1:{		// change name
+				case 1:{		// change name\
+					Tools.clear();
 					System.out.println(Menu.space + "Current Name : " + client.getName());
 					client.setName(Tools.getInput("Enter new name"));
 					break;
 				}
 				
 				case 2:{		// change age
+					Tools.clear();
 					System.out.println(Menu.space + "Current Age : " + client.getAge());
 					client.setAge(Tools.getInputI("Enter new age"));
 					break;
 				}
 				
 				case 3:{		// change gender
+					Tools.clear();
 					System.out.println(Menu.space + "Current Gender : " + client.getGender());
 					client.setGender(Tools.getInput("Enter new gender"));
 					break;
 				}
 				
 				case 4:{		// change number
+					Tools.clear();
 					System.out.println(Menu.space + "Current Number : " + client.getNumber());
 					client.setNumber(Tools.getInput("Enter new number"));
 					break;
 				}
 				
 				case 5:{		// change address
+					Tools.clear();
 					System.out.println(Menu.space + "Current Address : " + client.getAddress());
 					client.setAddress(Tools.getInput("Enter new Address"));
 					break;
 				}
 				
 				case 6:{		// change email
+					Tools.clear();
 					System.out.println(Menu.space + "Current Email : " + client.getEmail());
 					client.setEmail(Tools.getInput("Enter new email"));
 					break;
@@ -341,7 +347,7 @@ public abstract class Management {
 							
 							case 2 :{		//  deposit money
 								Tools.clear();
-								client.getAccount().deposid(Tools.getInputD("Enter Deposit money"));
+								client.getAccount().deposid(Tools.getInputD("Enter the amount of money you want to deposit"));
 								
 								break;
 							}

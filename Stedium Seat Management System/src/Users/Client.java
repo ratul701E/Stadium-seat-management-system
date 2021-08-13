@@ -1,5 +1,5 @@
 /*
- * This class is written by Rianul Amin Rian
+ * Rianul Amin Rian writes this class
  * Id : 21-44589-1
  * 
  */

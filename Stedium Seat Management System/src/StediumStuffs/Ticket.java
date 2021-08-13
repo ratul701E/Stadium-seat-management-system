@@ -1,5 +1,5 @@
 /*
- * This interface is written by Fardin Ibna Rahman
+ * Fardin Ibna Rahman writes this class
  * Id : 21-44705-1
  * 
  */
@@ -11,7 +11,6 @@ import java.io.Serializable;
 import Management.Tools;
 import Menus.Menu;
 
-// ratul
 public class Ticket implements Serializable{
 	private String ID;
 	private int quantities;

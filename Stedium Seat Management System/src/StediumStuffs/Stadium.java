@@ -1,5 +1,5 @@
 /*
- * This class is written by whole team
+ * Whole team writes this class
  */
 
 package StediumStuffs;
@@ -17,7 +17,7 @@ import Users.*;
 public class Stadium {
 	
 	
-	public void startServer() {
+	public void startServer() { 	// Starting the server
 		Database.restoreData();
 		int choice;
 		while(true) {
@@ -147,12 +147,12 @@ public class Stadium {
 		
 		
 		int age;
-		System.out.println(Menu.space + "==== Signup Page ====\n");
+		
 		
 		while(true) {
 			
 			Tools.clear();
-			
+			System.out.println(Menu.space + "==== Create New Account ====\n\n");
 			System.out.print(Menu.space + "1. As client\n"
 					+ Menu.space + "2. As admin\n"
 					+ Menu.space + "0. Back\n"
@@ -209,7 +209,7 @@ public class Stadium {
 	private Ticket bookTicket(Client client, Match match) {
 		
 		if(!match.getValid()) {
-			Tools.clearPrintHold("Match reservation turned off by admin");
+			Tools.clearPrintHold("An admin turns off this match reservation.");
 			return null;
 		}
 
@@ -231,7 +231,7 @@ public class Stadium {
 			
 			case 1:{
 				// booking vip seats
-				int seatCount = Tools.getInputI("How many seat you want");
+				int seatCount = Tools.getInputI("How many seats do you want");
 				
 				if(match.getVipSeats()>= seatCount && Management.canBuy(client, match.getVipCost()*seatCount)) {
 					match.removeVipSeats(seatCount);
@@ -248,7 +248,7 @@ public class Stadium {
 			
 			case 2:{
 				// booking normal seats
-				int seatCount = Tools.getInputI("How many seat you want");
+				int seatCount = Tools.getInputI("How many seats do you want");
 				
 				if(match.getNormalSeats()>= seatCount && Management.canBuy(client, match.getNormalCost()*seatCount)) {
 					match.removeNormalSeats(seatCount);
@@ -643,6 +643,7 @@ public class Stadium {
 								Tools.clear();
 								
 								Admin.setNewMails(false);
+								System.out.println(Menu.space + "==== Inbox ====\n\n");
 								
 								if(admin.countAllMails() == 0) {
 									Menu.menus.emptyMenu();
